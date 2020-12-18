@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { SIGN_IN } from "../../config";
+import { SIGNIN_API } from "../../config";
 import styled from "styled-components";
 
 const SignIn = () => {
@@ -10,7 +10,7 @@ const SignIn = () => {
 
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(`${SIGN_IN}`, {
+    fetch(`${SIGNIN_API}`, {
       method: "POST",
       body: JSON.stringify({
         email: email,
