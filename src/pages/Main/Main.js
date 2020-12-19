@@ -7,6 +7,12 @@ const Main = () => {
   const goToSurvey = () => {
     history.push("/Survey");
   };
+  const goToLogin = () => {
+    history.push("/Login");
+  };
+  const goToSignUp = () => {
+    history.push("/SignUp");
+  };
 
   return (
     <WrapMain>
@@ -20,6 +26,10 @@ const Main = () => {
       <Logo>
         <img src="/images/JM/dneuro.png" alt="dneuro" />
       </Logo>
+      <Container>
+        <Login onClick={goToLogin}>로그인</Login>
+        <SignUp onClick={goToSignUp}>회원가입</SignUp>
+      </Container>
     </WrapMain>
   );
 };
@@ -78,4 +88,32 @@ const Logo = styled.footer`
   width: 170px;
   height: 50px;
   margin-top: 70px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 190px;
+`;
+
+const Login = styled.div`
+  color: #222;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SignUp = styled.div`
+  color: #222;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
