@@ -7,8 +7,8 @@ const Main = () => {
   const goToSurvey = () => {
     history.push("/Survey");
   };
-  const goToLogin = () => {
-    history.push("/Login");
+  const goToSignIn = () => {
+    history.push("/SignIn");
   };
   const goToSignUp = () => {
     history.push("/SignUp");
@@ -27,7 +27,7 @@ const Main = () => {
         <img src="/images/JM/dneuro.png" alt="dneuro" />
       </Logo>
       <Container>
-        <Login onClick={goToLogin}>로그인</Login>
+        <Login onClick={goToSignIn}>로그인</Login>
         <SignUp onClick={goToSignUp}>회원가입</SignUp>
       </Container>
     </WrapMain>
