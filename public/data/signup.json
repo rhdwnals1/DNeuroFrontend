@@ -1,0 +1,86 @@
+{
+  "nationality": [
+    {
+      "id": 0,
+      "country": "KOREA"
+    },
+    {
+      "id": 1,
+      "country": "JAPAN"
+    },
+    {
+      "id": 2,
+      "country": "CHINA"
+    },
+    {
+      "id": 3,
+      "country": "UNITED STATES"
+    },
+    {
+      "id": 4,
+      "country": "GERMANY"
+    },
+    {
+      "id": 5,
+      "country": "FRANCE"
+    },
+    {
+      "id": 6,
+      "country": "ENGLAND"
+    },
+    {
+      "id": 7,
+      "country": "RUSSIA"
+    }
+  ],
+  "birthMonth": [
+    {
+      "id" : 0,
+      "month" : "01"
+    },
+    {
+      "id" : 1,
+      "month" : "02"
+    },
+    {
+      "id" : 2,
+      "month" : "03"
+    },
+    {
+      "id" : 3,
+      "month" : "04"
+    },
+    {
+      "id" : 4,
+      "month" : "05"
+    },
+    {
+      "id" : 5,
+      "month" : "06"
+    },
+    {
+      "id" : 6,
+      "month" : "07"
+    },
+    {
+      "id" : 7,
+      "month" : "08"
+    },
+    {
+      "id" : 8,
+      "month" : "09"
+    },
+    {
+      "id" : 9,
+      "month" : "10"
+    },
+    {
+      "id" : 10,
+      "month" : "11"
+    },
+    {
+      "id" : 11,
+      "month" : "12"
+    }
+  ]
+}
