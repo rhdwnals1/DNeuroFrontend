@@ -23,7 +23,7 @@ const SignIn = () => {
         if (res) {
           localStorage.setItem("token", `${res}`);
           alert("로그인에 성공하셨습니다.");
-          history.push({ pathname: "/", state: { res } });
+          history.push({ pathname: "/Main", state: { res } });
         } else {
           alert("이메일 또는 비밀번호를 확인해주세요.");
         }
