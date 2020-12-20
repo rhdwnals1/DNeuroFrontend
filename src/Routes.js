@@ -4,6 +4,7 @@ import Main from "./pages/Main/Main";
 import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import Result from "./pages/Result/Result";
+import Survey from "./pages/Survey/Survey";
 
 class Routes extends Component {
   render() {
@@ -15,6 +16,7 @@ class Routes extends Component {
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/Main" component={Main} />
           <Route exact path="/Result" component={Result} />
+          <Route exact path="/Survey" component={Survey} />
         </Switch>
       </Router>
     );
