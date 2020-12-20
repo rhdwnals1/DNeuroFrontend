@@ -21,7 +21,7 @@ const SignIn = () => {
       .then((res) => {
         console.log("백엔드 : ", res);
         if (res) {
-          localStorage.setItem("token", `${res}`);
+          localStorage.setItem("token", `${res.token}`);
           alert("로그인에 성공하셨습니다.");
           history.push({ pathname: "/Main", state: { res } });
         } else {
