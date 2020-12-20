@@ -23,8 +23,7 @@ const Result = () => {
   }, []);
 
   const myType = content && content.slice(0, content.indexOf("\r"));
-  const firstContent =
-    content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
+  const firstContent = content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
   const secondContent = content && content.slice(content.lastIndexOf("\r"));
 
   return (
