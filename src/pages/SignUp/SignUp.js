@@ -1,7 +1,7 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment, useEffect, useState } from "react";
 import styled, { css, ThemeProvider } from "styled-components";
 import { justifyCenter } from "../../styles/CommonStyle";
-import { SIGNUP_API } from "../../config";
+import { SIGNUP_API, AWS_API, SIGNUP_DATA } from "../../config";
 import { useHistory, Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -15,20 +15,31 @@ const SignUp = () => {
   const [day, setDay] = useState("");
   const [gender, setGender] = useState("");
   const [nationality, setNationality] = useState("");
+  const [nation, setNation] = useState([]);
+  const [monthBirth, setMonthBirth] = useState([]);
 
   const idValue = id + "@" + email;
   const birthValue = year + "-" + month + "-" + day;
 
+  useEffect(() => {
+    fetch(SIGNUP_DATA)
+      .then((res) => res.json())
+      .then((res) => setNation(res.nationality));
+    fetch(SIGNUP_DATA)
+      .then((res) => res.json())
+      .then((res) => setMonthBirth(res.birthMonth));
+  }, []);
+
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(SIGNUP_API, {
+    fetch(`http://13.125.154.100:8000/user/signup`, {
       method: "POST",
       body: JSON.stringify({
         email: idValue,
         password: pw,
+        country: nationality,
         sex: gender,
         birthday: birthValue,
-        country: nationality,
       }),
     })
       .then((res) => res.json())
@@ -88,7 +99,7 @@ const SignUp = () => {
     setNationality(value);
   };
 
-  console.log(idValue, pw, birthValue, gender, nationality);
+  console.log(idValue, pw, gender, nationality, birthValue);
 
   return (
     <Fragment>
@@ -125,21 +136,15 @@ const SignUp = () => {
               <WrapBirth>
                 <h3>생년월일</h3>
                 <WrapDateInput>
-                  <DateInput onChange={handleChangeYear}>
-                    <option>선택</option>
-                    <option>1994</option>
-                  </DateInput>
-                  <span>년</span>
-                  <DateInput onChange={handleChangeMonth}>
-                    <option>선택</option>
-                    <option>01</option>
-                  </DateInput>
-                  <span>월</span>
-                  <DateInput onChange={handleChangeDay}>
-                    <option>선택</option>
-                    <option>12</option>
-                  </DateInput>
-                  <span>일</span>
+                  <DateInput placeholder="년" onChange={handleChangeYear}></DateInput>
+                  <MonthInput onChange={handleChangeMonth}>
+                    <option>월</option>
+                    {monthBirth[0] &&
+                      monthBirth.map((el) => {
+                        return <option key={el.id}>{el.month}</option>;
+                      })}
+                  </MonthInput>
+                  <DateInput placeholder="일" onChange={handleChangeDay}></DateInput>
                 </WrapDateInput>
               </WrapBirth>
               <WrapGender>
@@ -156,7 +161,10 @@ const SignUp = () => {
                 <h3>국적</h3>
                 <NationalityInput onChange={handleNationality}>
                   <option>선택해주세요</option>
-                  <option>KOREA</option>
+                  {nation[0] &&
+                    nation.map((el) => {
+                      return <option key={el.id}>{el.country}</option>;
+                    })}
                 </NationalityInput>
               </WrapNationality>
             </InfoNeed>
@@ -208,7 +216,7 @@ const Background = styled.section`
 `;
 
 const WrapSignUp = styled.section`
-  width: 480px;
+  width: 400px;
   padding: 20px;
 `;
 
@@ -315,8 +323,17 @@ const WrapDateInput = styled.div`
   }
 `;
 
-const DateInput = styled.select`
-  width: 28%;
+const DateInput = styled.input`
+  width: 31%;
+  height: 35px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  font-size: 15px;
+  outline-style: none;
+`;
+
+const MonthInput = styled.select`
+  width: 31%;
   height: 35px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
