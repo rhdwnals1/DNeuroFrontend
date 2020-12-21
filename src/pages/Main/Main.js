@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const Main = () => {
+  const [login, setLogin] = useState(false);
+  const [token, setToken] = useState(true);
+
+  const isLogin = localStorage.getItem("token");
+  const isToken = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (isLogin) {
+      setLogin(true);
+    } else {
+      setLogin(false);
+    }
+  });
+
+  useEffect(() => {
+    if (isToken) {
+      setToken(true);
+    } else {
+      setToken(false);
+    }
+  });
+
   const history = useHistory();
   const goToSurvey = () => {
     history.push("/Survey");
@@ -14,6 +36,15 @@ const Main = () => {
     history.push("/SignUp");
   };
 
+  const goToLogout = () => {
+    localStorage.removeItem("token");
+    history.push("/Main");
+  };
+
+  const doNotEnter = () => {
+    alert("로그인이 필요합니다.");
+  };
+
   return (
     <WrapMain>
       <Title>
@@ -22,12 +53,20 @@ const Main = () => {
         어울리는 유형은?
       </Title>
       <SubTitle>테스트로 보는 내 성격, MBTI</SubTitle>
-      <Test onClick={goToSurvey}>테스트 시작</Test>
+      {token ? (
+        <Test onClick={goToSurvey}>테스트 시작</Test>
+      ) : (
+        <Test onClick={doNotEnter}> 테스트 시작</Test>
+      )}
       <Logo>
         <img src="/images/JM/dneuro.png" alt="dneuro" />
       </Logo>
       <Container>
-        <Login onClick={goToSignIn}>로그인</Login>
+        {login ? (
+          <Login onClick={goToLogout}>로그아웃</Login>
+        ) : (
+          <Login onClick={goToSignIn}>로그인</Login>
+        )}
         <SignUp onClick={goToSignUp}>회원가입</SignUp>
       </Container>
     </WrapMain>
