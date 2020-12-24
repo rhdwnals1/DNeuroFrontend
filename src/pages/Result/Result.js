@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect } from "react";
-import { useState, useHistory } from "react-router-dom";
+import React, { Fragment, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import RESULT_DATA from "../../config";
+import { RESULT_DATA } from "../../config";
 import { boxShadow, justifyCenter } from "../../styles/CommonStyle";
 
 const Result = () => {
@@ -10,11 +10,22 @@ const Result = () => {
     history.push("/Main");
   };
 
+  const [content, setContent] = useState();
   const [percent, setPercent] = useState();
 
   useEffect(() => {
-    fetch(`${RESULT_DATA}`);
-  });
+    fetch(`${RESULT_DATA}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setContent(res.data.content);
+        setPercent(res.data.percent);
+      });
+  }, []);
+
+  const myType = content && content.slice(0, content.indexOf("\r"));
+  const firstContent =
+    content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
+  const secondContent = content && content.slice(content.lastIndexOf("\r"));
 
   return (
     <Fragment>
@@ -24,14 +35,18 @@ const Result = () => {
         </Logo>
         <Explain>
           <div>나의 유형은</div>
-          <div>A가 가장 많은 사람</div>
+          <div>{myType}</div>
         </Explain>
         <Img>
           <img src="/images/JM/3.png" alt="" />
         </Img>
+        <Content>
+          <div>{firstContent}</div>
+          <div>{secondContent}</div>
+        </Content>
         <Container>
           <div>MBTI를 한 사람 중 나와 같은 유형은?</div>
-          <div>59.2%</div>
+          <div>{percent}%</div>
         </Container>
         <Button onClick={goToMain}>테스트 다시하기</Button>
       </WrapResult>
@@ -81,6 +96,21 @@ const Img = styled.div`
   img {
     width: 300px;
     height: 300px;
+  }
+`;
+
+const Content = styled.div`
+  text-align: left;
+  margin: 5px 95px 0;
+  font-size: 15px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.8px;
+
+  div {
+    &:last-child {
+      margin-bottom: 30px;
+    }
   }
 `;
 
