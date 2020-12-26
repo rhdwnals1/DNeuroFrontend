@@ -91,7 +91,7 @@ const WrapMain = styled.section`
 const Logo = styled.footer`
   width: 110px;
   height: 120px;
-  margin: 70px auto 0;
+  margin: 130px auto 0;
 `;
 
 const Title = styled.div`
@@ -150,7 +150,7 @@ const Login = styled.div`
     width: 80px;
     height: 30px;
     border: 1px solid pink;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #fff;
     background-color: ${theme.pink};
   }
@@ -166,9 +166,9 @@ const SignUp = styled.div`
   &:hover {
     cursor: pointer;
     width: 80px;
-    height: 30px;
+    height: 3px;
     border: 1px solid pink;
-    border-radius: 10px;
+    border-radius: 15px;
     color: #fff;
     background-color: ${theme.pink};
   }
