@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
-import styled, { css, ThemeProvider } from "styled-components";
-import { justifyCenter } from "../../styles/CommonStyle";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { justifyCenter, theme } from "../../styles/CommonStyle";
 import { SIGNUP_API, AWS_API, SIGNUP_DATA } from "../../config";
 import { useHistory, Link } from "react-router-dom";
 
@@ -102,110 +102,115 @@ const SignUp = () => {
   console.log(idValue, pw, gender, nationality, birthValue);
 
   return (
-    <Fragment>
-      <Background>
-        <WrapSignUp>
-          <Header>
-            <HeaderImage src="https://lh3.googleusercontent.com/VbAt1Idbi-4NHicLjzGdgRFA9hd8hoaOk6SGD2be-BOrNzjlHcHSefupjSDPDkT3M2U40Eu2YOhY9wvAr_F_P7ZI9NOFAuUHvaliXyZ6ap_qAkV2fI2IDKHw17c7ULEL_JcLmmbQTgP2L6mPiiWPgjkXHB9pGL2RNX1TTLoa8E1gVMA2BvWWn7fD8u5kNqk4FYSSq096sZ6ZlEkNsjtezfuI_yd4XUCcEcWW1An41vgwIbcI8tyK-1ZV3IXjC8WF6KUyceEfgBa7hGuO-XDMGwGymBbl156OeEcz6k1VlNQsuunAw-jLll5CfzTmsYgGeuT2gn9U9pZnkAtq3QrK6Ub7AhfJC64MWlvTPbLy4eR1qTMd6w5fE_lvqo548Yx9BngYxUPyIKgA69aFygz5COyY3bZ73pKK1t9-t8OnOE2w27_gxIoIk2JLBfYlLOFlBJI73JPpHQ0AqJHz48Sm2XKjjDtCBDdnSJ4SEfdAJEjgYuGwbR8tpawVwsnQ4vinZvCZlgadMDbmdnU74LU28z4SOPeBvjUnwjN3x7jbUfQuBw--e0gVsdOwu08MiwBXWf_7LigknjlQ7c9RgybqG72e1RoZzcc_y3h6RNOY2nO71aOupVk3MX6u8MZ0mfOSUeLTxjSL1wyKgubbgqJult-E8rf95IiYL3F5T0GxF5qGi3_QxkCExcWpWweZeQ=w869-h980-no?authuser=0z" />
-          </Header>
-          <Body>
-            <BodyHeader>회원가입</BodyHeader>
-            <InfoNeed>
-              <WrapEmail>
-                <h3>이메일</h3>
-                <WrapInput>
-                  <IdInput placeholder="아이디를 입력해주세요." onChange={handleChangeId}></IdInput>
-                  <span>@</span>
-                  <EmailInput onChange={handleChangeEmail}>
-                    <option>이메일을 선택해주세요</option>
-                    <option>naver.com</option>
-                    <option>gmail.com</option>
-                  </EmailInput>
-                  {/* <EmailInput onChange={handleChangeEmail}></EmailInput> */}
-                </WrapInput>
-              </WrapEmail>
-              <WrapPassword>
-                <h3>비밀번호</h3>
-                <p>8자 이상 입력해주세요.</p>
-                <PwInput type="password" onChange={handleChangePw} />
-              </WrapPassword>
-              <WrapPassword>
-                <h3>비밀번호 확인</h3>
-                <PwInput type="password" onChange={handleChangeRePw} />
-              </WrapPassword>
-              <WrapBirth>
-                <h3>생년월일</h3>
-                <WrapDateInput>
-                  <DateInput placeholder="년" onChange={handleChangeYear}></DateInput>
-                  <MonthInput onChange={handleChangeMonth}>
-                    <option>월</option>
-                    {monthBirth[0] &&
-                      monthBirth.map((el) => {
-                        return <option key={el.id}>{el.month}</option>;
-                      })}
-                  </MonthInput>
-                  <DateInput placeholder="일" onChange={handleChangeDay}></DateInput>
-                </WrapDateInput>
-              </WrapBirth>
-              <WrapGender>
-                <h3>성별</h3>
-                <WrapGenderInput>
-                  <GenderInput onChange={handleChangeGender}>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <Background>
+          <WrapSignUp>
+            <Header>
+              <HeaderImage src="https://lh3.googleusercontent.com/VbAt1Idbi-4NHicLjzGdgRFA9hd8hoaOk6SGD2be-BOrNzjlHcHSefupjSDPDkT3M2U40Eu2YOhY9wvAr_F_P7ZI9NOFAuUHvaliXyZ6ap_qAkV2fI2IDKHw17c7ULEL_JcLmmbQTgP2L6mPiiWPgjkXHB9pGL2RNX1TTLoa8E1gVMA2BvWWn7fD8u5kNqk4FYSSq096sZ6ZlEkNsjtezfuI_yd4XUCcEcWW1An41vgwIbcI8tyK-1ZV3IXjC8WF6KUyceEfgBa7hGuO-XDMGwGymBbl156OeEcz6k1VlNQsuunAw-jLll5CfzTmsYgGeuT2gn9U9pZnkAtq3QrK6Ub7AhfJC64MWlvTPbLy4eR1qTMd6w5fE_lvqo548Yx9BngYxUPyIKgA69aFygz5COyY3bZ73pKK1t9-t8OnOE2w27_gxIoIk2JLBfYlLOFlBJI73JPpHQ0AqJHz48Sm2XKjjDtCBDdnSJ4SEfdAJEjgYuGwbR8tpawVwsnQ4vinZvCZlgadMDbmdnU74LU28z4SOPeBvjUnwjN3x7jbUfQuBw--e0gVsdOwu08MiwBXWf_7LigknjlQ7c9RgybqG72e1RoZzcc_y3h6RNOY2nO71aOupVk3MX6u8MZ0mfOSUeLTxjSL1wyKgubbgqJult-E8rf95IiYL3F5T0GxF5qGi3_QxkCExcWpWweZeQ=w869-h980-no?authuser=0z" />
+            </Header>
+            <Body>
+              <BodyHeader>회원가입</BodyHeader>
+              <InfoNeed>
+                <WrapEmail>
+                  <h3>이메일</h3>
+                  <WrapInput>
+                    <IdInput
+                      placeholder="아이디를 입력해주세요."
+                      onChange={handleChangeId}
+                    ></IdInput>
+                    <span>@</span>
+                    <EmailInput onChange={handleChangeEmail}>
+                      <option>이메일을 선택해주세요</option>
+                      <option>naver.com</option>
+                      <option>gmail.com</option>
+                    </EmailInput>
+                    {/* <EmailInput onChange={handleChangeEmail}></EmailInput> */}
+                  </WrapInput>
+                </WrapEmail>
+                <WrapPassword>
+                  <h3>비밀번호</h3>
+                  <p>8자 이상 입력해주세요.</p>
+                  <PwInput type="password" onChange={handleChangePw} />
+                </WrapPassword>
+                <WrapPassword>
+                  <h3>비밀번호 확인</h3>
+                  <PwInput type="password" onChange={handleChangeRePw} />
+                </WrapPassword>
+                <WrapBirth>
+                  <h3>생년월일</h3>
+                  <WrapDateInput>
+                    <DateInput placeholder="년" onChange={handleChangeYear}></DateInput>
+                    <MonthInput onChange={handleChangeMonth}>
+                      <option>월</option>
+                      {monthBirth[0] &&
+                        monthBirth.map((el) => {
+                          return <option key={el.id}>{el.month}</option>;
+                        })}
+                    </MonthInput>
+                    <DateInput placeholder="일" onChange={handleChangeDay}></DateInput>
+                  </WrapDateInput>
+                </WrapBirth>
+                <WrapGender>
+                  <h3>성별</h3>
+                  <WrapGenderInput>
+                    <GenderInput onChange={handleChangeGender}>
+                      <option>선택해주세요</option>
+                      <option>남자</option>
+                      <option>여자</option>
+                    </GenderInput>
+                  </WrapGenderInput>
+                </WrapGender>
+                <WrapNationality>
+                  <h3>국적</h3>
+                  <NationalityInput onChange={handleNationality}>
                     <option>선택해주세요</option>
-                    <option>남자</option>
-                    <option>여자</option>
-                  </GenderInput>
-                </WrapGenderInput>
-              </WrapGender>
-              <WrapNationality>
-                <h3>국적</h3>
-                <NationalityInput onChange={handleNationality}>
-                  <option>선택해주세요</option>
-                  {nation[0] &&
-                    nation.map((el) => {
-                      return <option key={el.id}>{el.country}</option>;
-                    })}
-                </NationalityInput>
-              </WrapNationality>
-            </InfoNeed>
-            <Agreement>
-              <h3>약관 동의</h3>
-              <WrapContents>
-                <AgreeAll>
-                  <CheckBox type="checkbox" />
-                  <h4>전체 동의</h4>
-                </AgreeAll>
-                <Clauses>
-                  <Clause>
+                    {nation[0] &&
+                      nation.map((el) => {
+                        return <option key={el.id}>{el.country}</option>;
+                      })}
+                  </NationalityInput>
+                </WrapNationality>
+              </InfoNeed>
+              <Agreement>
+                <h3>약관 동의</h3>
+                <WrapContents>
+                  <AgreeAll>
                     <CheckBox type="checkbox" />
-                    <span>만 14세 이상입니다.</span>
-                  </Clause>
-                  <Clause>
-                    <CheckBox type="checkbox" />
-                    <span>
-                      <Link to="">이용약관</Link>
-                    </span>
-                  </Clause>
-                  <Clause>
-                    <CheckBox type="checkbox" />
-                    <span>
-                      <Link to="">개인정보처리방침</Link>
-                    </span>
-                  </Clause>
-                  <Clause>
-                    <CheckBox type="checkbox" />
-                    <span>이벤트, 프로모션 알림 메일 및 SMS 수신</span>
-                  </Clause>
-                </Clauses>
-              </WrapContents>
-            </Agreement>
-            <CompleteBtn>
-              <Button onClick={goToMain}>회원가입</Button>
-            </CompleteBtn>
-          </Body>
-        </WrapSignUp>
-      </Background>
-    </Fragment>
+                    <h4>전체 동의</h4>
+                  </AgreeAll>
+                  <Clauses>
+                    <Clause>
+                      <CheckBox type="checkbox" />
+                      <span>만 14세 이상입니다.</span>
+                    </Clause>
+                    <Clause>
+                      <CheckBox type="checkbox" />
+                      <span>
+                        <Link to="">이용약관</Link>
+                      </span>
+                    </Clause>
+                    <Clause>
+                      <CheckBox type="checkbox" />
+                      <span>
+                        <Link to="">개인정보처리방침</Link>
+                      </span>
+                    </Clause>
+                    <Clause>
+                      <CheckBox type="checkbox" />
+                      <span>이벤트, 프로모션 알림 메일 및 SMS 수신</span>
+                    </Clause>
+                  </Clauses>
+                </WrapContents>
+              </Agreement>
+              <CompleteBtn>
+                <Button onClick={goToMain}>회원가입</Button>
+              </CompleteBtn>
+            </Body>
+          </WrapSignUp>
+        </Background>
+      </Fragment>
+    </ThemeProvider>
   );
 };
 
@@ -226,7 +231,8 @@ const Header = styled.section`
 `;
 
 const HeaderImage = styled.img`
-  width: 100px;
+  width: 110px;
+  height: 120px;
   margin: 0 0 50px 0;
 `;
 
@@ -425,7 +431,7 @@ const CompleteBtn = styled.form`
 const Button = styled.button`
   width: 100%;
   height: 60px;
-  background-color: black;
+  background-color: #000;
   border: none;
   color: white;
   font-size: 20px;

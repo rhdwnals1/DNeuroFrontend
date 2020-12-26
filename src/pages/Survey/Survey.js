@@ -2,8 +2,8 @@
 /* eslint-disable eqeqeq */
 import { cleanup } from "@testing-library/react";
 import React, { Fragment, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { useHistory } from "react-router-dom";
 import { AWS_API } from "../../config";
 import { flexCenter, boxShadow, theme } from "../../styles/CommonStyle";
 
