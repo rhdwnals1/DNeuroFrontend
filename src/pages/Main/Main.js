@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { boxShadow } from "../../styles/CommonStyle";
+import { theme } from "../../styles/CommonStyle";
 import styled from "styled-components";
 
 const Main = () => {
@@ -47,6 +49,9 @@ const Main = () => {
 
   return (
     <WrapMain>
+      <Logo>
+        <img src="/images/JM/dneurologo.png" alt="dneuro" />
+      </Logo>
       <Title>
         내 성격에 딱!
         <br />
@@ -58,9 +63,6 @@ const Main = () => {
       ) : (
         <Test onClick={doNotEnter}> 테스트 시작</Test>
       )}
-      <Logo>
-        <img src="/images/JM/dneuro.png" alt="dneuro" />
-      </Logo>
       <Container>
         {login ? (
           <Login onClick={goToLogout}>로그아웃</Login>
@@ -76,7 +78,9 @@ const Main = () => {
 export default Main;
 
 const WrapMain = styled.section`
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -84,9 +88,15 @@ const WrapMain = styled.section`
   text-align: center;
 `;
 
+const Logo = styled.footer`
+  width: 110px;
+  height: 120px;
+  margin: 70px auto 0;
+`;
+
 const Title = styled.div`
-  margin-top: 17vh;
-  margin-bottom: 45px;
+  /* margin-top: 17vh; */
+  margin: 40px auto 45px;
   padding: 0 10px;
   font-size: 32px;
   font-weight: 800;
@@ -99,60 +109,67 @@ const SubTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   padding: 0 10px;
 `;
 
 const Test = styled.button`
   width: 256px;
   height: 50px;
-  border: solid 0.75px #becc01;
+  margin: 20px auto;
+  border: solid 0.75px #ee762c;
   border-radius: 32px;
-  background-color: #becc01;
+  background-color: ${theme.pink};
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
   outline-style: none;
 
   &:hover {
-    background-color: #99a400;
+    ${boxShadow};
+    background-color: ${theme.pink};
     cursor: pointer;
   }
-`;
-
-const Logo = styled.footer`
-  position: absolute;
-  left: 110px;
-  text-align: center;
-  width: 170px;
-  height: 50px;
-  margin-top: 70px;
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 190px;
+  margin-top: 50px;
 `;
 
 const Login = styled.div`
+  padding-top: 7px;
   color: #222;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   margin: 0 10px;
 
   &:hover {
     cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border: 1px solid pink;
+    border-radius: 10px;
+    color: #fff;
+    background-color: ${theme.pink};
   }
 `;
 
 const SignUp = styled.div`
+  padding-top: 7px;
   color: #222;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   margin: 0 10px;
 
   &:hover {
     cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border: 1px solid pink;
+    border-radius: 10px;
+    color: #fff;
+    background-color: ${theme.pink};
   }
 `;
