@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { SIGNIN_API } from "../../config";
-import { boxShadow, theme } from "../../styles/CommonStyle";
 import styled from "styled-components";
 
 const SignIn = () => {
@@ -43,10 +42,7 @@ const SignIn = () => {
     <Fragment>
       <WrapSignIn>
         <Logo>
-          <img
-            src="https://lh3.googleusercontent.com/-sfYTUM5rL-9wWBbnWrQ-fKLNS01kKHJ0FiT1v3fbcnsaquk0_DP9kMQosYbGgIyD2jHXQO5EqMbYba4MFftVwEORWP7-0AESDUWDlQ4fxhTIupoxr8OTi_2wVHEnX0mpf1jC-P2gbFcwpj6QzybsGcfOkg09g2Mvh84AAw2N38rL_3fg0d_49nz2ksYNWAY1eGahZIbSZdNwJYd5oRY5AUElSs2rhA9qxHFVMOr845-F7XpqKtkaFDU-icYbi-kL1gqggr4ZQbKnLu6gvXWzqaeCmJ2RM9aSQmwjIgPtJSEsjdvzYsVHL8y5j6kzYGF3z0na7M_RLJpWM8MjCA9-_Zep-48uS4LTC5zet1N7Q3opEYPNyMz2womV7pfxAOsf0W4CfKwBX7Bj8L86Co4e81GJW73LkDqmbFVHs-Ak3cJLFoCmmwqcoA5TuX-FVHy4dbyDjPZ1fd5II6CUS1VSEw8GVdvdSPIsWMSrLOLXtQK4OW0zAkXrZOr2K1CJXwESM2NCWOc_EkKPld1GH0WIY_Va55EjxqT8teAEL7RAfc87maRElXbfoTkHhKViFqbTeMum8FIDu6AdwfRzaSBJGLkOidRsN1kts5k7dGWApAvQm1T9jQ1aIQWA8BnhDogKswlF6hx6mIlSzYQlOd1t-MZit65M3ibbuukVGwg1aNo8-3yI_AkLZD06pA5MQ=w869-h980-no?authuser=0"
-            alt="logo"
-          />
+          <img src="/images/JM/dneuro.png" alt="logo" />
         </Logo>
         <Login>
           <input
@@ -88,8 +84,8 @@ const WrapSignIn = styled.section`
 
 const Logo = styled.div`
   img {
-    width: 110px;
-    height: 120px;
+    width: 200px;
+    height: 60px;
   }
 `;
 
@@ -136,10 +132,10 @@ const Button = styled.div`
   height: 50px;
   margin: 30px 0;
   padding: 13px 15px;
-  background-color: ${theme.pink};
-  border: 1px solid ${theme.pink};
-  border-radius: 20px;
-  color: #fff;
+  background-color: #becc01;
+  border: 1px solid #becc01;
+  border-radius: 4px;
+  color: #ffffff;
   font-size: 17px;
   line-height: 1.41;
   font-weight: bold;
@@ -150,8 +146,7 @@ const Button = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${theme.pink};
-    ${boxShadow}
+    background-color: #99a400;
   }
 `;
 
@@ -162,16 +157,6 @@ const SignUp = styled.div`
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
-
-  &:hover {
-    cursor: pointer;
-    width: 80px;
-    height: 20px;
-    border: 1px solid ${theme.pink};
-    border-radius: 15px;
-    color: #ffffff;
-    background-color: ${theme.pink};
-  }
 `;
 
 export default SignIn;
