@@ -1,6 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { SIGNIN_API } from "../../config";
+<<<<<<< HEAD
+=======
+import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
+>>>>>>> d2646c884be6f5518cf95af11050b07408f9609b
 import styled from "styled-components";
 
 const SignIn = () => {
@@ -42,7 +46,11 @@ const SignIn = () => {
     <Fragment>
       <WrapSignIn>
         <Logo>
+<<<<<<< HEAD
           <img src="/images/JM/dneuro.png" alt="logo" />
+=======
+          <img src={imgUrl.logo} alt="logo" />
+>>>>>>> d2646c884be6f5518cf95af11050b07408f9609b
         </Logo>
         <Login>
           <input
