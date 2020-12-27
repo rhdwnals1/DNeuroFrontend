@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, Fragment, useEffect } from "react";
-=======
 import React, { Fragment, useEffect, useState } from "react";
->>>>>>> 2d7e796 (wip)
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RESULT_DATA } from "../../config";
