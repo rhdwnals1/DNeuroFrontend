@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { SIGNIN_API } from "../../config";
-import { boxShadow, theme } from "../../styles/CommonStyle";
+import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import styled from "styled-components";
 
 const SignIn = () => {
@@ -43,10 +43,7 @@ const SignIn = () => {
     <Fragment>
       <WrapSignIn>
         <Logo>
-          <img
-            src="https://lh3.googleusercontent.com/-sfYTUM5rL-9wWBbnWrQ-fKLNS01kKHJ0FiT1v3fbcnsaquk0_DP9kMQosYbGgIyD2jHXQO5EqMbYba4MFftVwEORWP7-0AESDUWDlQ4fxhTIupoxr8OTi_2wVHEnX0mpf1jC-P2gbFcwpj6QzybsGcfOkg09g2Mvh84AAw2N38rL_3fg0d_49nz2ksYNWAY1eGahZIbSZdNwJYd5oRY5AUElSs2rhA9qxHFVMOr845-F7XpqKtkaFDU-icYbi-kL1gqggr4ZQbKnLu6gvXWzqaeCmJ2RM9aSQmwjIgPtJSEsjdvzYsVHL8y5j6kzYGF3z0na7M_RLJpWM8MjCA9-_Zep-48uS4LTC5zet1N7Q3opEYPNyMz2womV7pfxAOsf0W4CfKwBX7Bj8L86Co4e81GJW73LkDqmbFVHs-Ak3cJLFoCmmwqcoA5TuX-FVHy4dbyDjPZ1fd5II6CUS1VSEw8GVdvdSPIsWMSrLOLXtQK4OW0zAkXrZOr2K1CJXwESM2NCWOc_EkKPld1GH0WIY_Va55EjxqT8teAEL7RAfc87maRElXbfoTkHhKViFqbTeMum8FIDu6AdwfRzaSBJGLkOidRsN1kts5k7dGWApAvQm1T9jQ1aIQWA8BnhDogKswlF6hx6mIlSzYQlOd1t-MZit65M3ibbuukVGwg1aNo8-3yI_AkLZD06pA5MQ=w869-h980-no?authuser=0"
-            alt="logo"
-          />
+          <img src={imgUrl.logo} alt="logo" />
         </Logo>
         <Login>
           <input

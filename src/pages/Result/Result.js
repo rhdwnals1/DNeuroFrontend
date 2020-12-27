@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useState, Fragment, useEffect } from "react";
-=======
 import React, { Fragment, useEffect, useState } from "react";
->>>>>>> 2d7e796 (wip)
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RESULT_DATA } from "../../config";
@@ -27,7 +23,8 @@ const Result = () => {
   }, []);
 
   const myType = content && content.slice(0, content.indexOf("\r"));
-  const firstContent = content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
+  const firstContent =
+    content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
   const secondContent = content && content.slice(content.lastIndexOf("\r"));
 
   return (
