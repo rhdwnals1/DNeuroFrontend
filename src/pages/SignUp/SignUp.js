@@ -125,7 +125,6 @@ const SignUp = () => {
                       <option>naver.com</option>
                       <option>gmail.com</option>
                     </EmailInput>
-                    {/* <EmailInput onChange={handleChangeEmail}></EmailInput> */}
                   </WrapInput>
                 </WrapEmail>
                 <WrapPassword>
