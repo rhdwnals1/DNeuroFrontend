@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { SIGNIN_API } from "../../config";
+import { VER1_API, VER2_API } from "../../config";
 import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import styled from "styled-components";
 const SignIn = () => {
@@ -9,13 +9,17 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(`${SIGNIN_API}`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
+    fetch(
+      // `${VER1_API}/user/signin`,
+      `${VER2_API}/user/signin`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log("백엔드 : ", res);

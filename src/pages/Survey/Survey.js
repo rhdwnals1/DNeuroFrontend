@@ -4,97 +4,105 @@ import { cleanup } from "@testing-library/react";
 import React, { Fragment, useEffect, useState } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { useHistory } from "react-router-dom";
-import { AWS_API } from "../../config";
+import { VER1_API, VER2_API } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 
 const Survey = () => {
   const history = useHistory();
   const [progress, setProgress] = useState();
   const [survey, setSurvey] = useState();
-  const [oldTime, setOldTime] = useState();
+  const [oldTime, setOldTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const progressCurrent = progress && progress.current;
-  const progressTotal = progress && progress.total;
   const surveyId = survey && survey.id;
   const surveyContent = survey && survey.content;
   const questionIdx = surveyContent && surveyContent.indexOf("A");
   const firstAnswer = surveyContent && surveyContent.indexOf("B");
+  const testTime = +currentTime - +oldTime;
 
-  const firstFetch = () => {
-    fetch(`${AWS_API}/survey/start`, {
-      method: "GET",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    })
+  const getSurveyData = () => {
+    fetch(
+      // `${VER1_API}/survey/start`,
+      `${VER2_API}/survey/start`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         setProgress(result.progress);
         setSurvey(result.survey);
+        console.log(result);
       });
   };
+
+  const postAnswerA = () => {
+    fetch(
+      // `${VER1_API}/survey/input`
+      `${VER2_API}/survey/input`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          survey_id: survey && survey.id,
+          answer: "A",
+          time: testTime,
+        }),
+      }
+    );
+  };
+
+  const postAnswerB = () => {
+    fetch(
+      // `${VER1_API}/survey/input`
+      `${VER2_API}/survey/input`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          survey_id: surveyId,
+          answer: "B",
+          time: testTime,
+        }),
+      }
+    );
+  };
+
   const countTime = () => {
     let getTime = new Date().getSeconds();
     return getTime;
   };
 
-  useEffect(() => {
-    firstFetch();
-    setOldTime(countTime());
-  }, []);
-
-  const postAnswerA = () => {
-    fetch(`${AWS_API}/survey/input`, {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        survey_id: survey && survey.id,
-        answer: "A",
-        time: testTime,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setCurrentTime(countTime());
-
-        if (res.survey.survey.id > 6) {
-          history.push("/Result");
-        }
-      });
+  const pressButtonA = () => {
+    postAnswerA();
+    // setCurrentTime(countTime());
+    if (survey && survey.id === 13) {
+      history.push("/Result");
+    }
   };
 
-  const testTime = +currentTime - +oldTime;
-  console.log(testTime);
-
-  const postAnswerB = () => {
-    fetch(`${AWS_API}/survey/input`, {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        survey_id: surveyId,
-        answer: "B",
-        time: 20,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res));
+  const pressButtonB = () => {
+    postAnswerB();
+    // setCurrentTime(countTime());
   };
 
   const resetTest = () => {
-    fetch(`${AWS_API}/survey/reset`, {
-      method: "POST",
-      headers: {
-        Authorization: localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res));
+    getSurveyData();
   };
+
+  useEffect(() => {
+    getSurveyData();
+    setOldTime(countTime());
+  }, []);
+
+  console.log(testTime);
 
   return (
     <ThemeProvider theme={theme}>
@@ -102,7 +110,10 @@ const Survey = () => {
         <WrapSurvey>
           <SurveyBackground>
             <Header>
-              <span>Investment Risk Profiling</span>
+              <h1>Investment Risk Profiling</h1>
+              <div className="surveyName">
+                Question<span className="surveyNumber">"{survey && survey.id}"</span>
+              </div>
             </Header>
             <WrapMain>
               <Question>
@@ -111,15 +122,13 @@ const Survey = () => {
                 </h1>
               </Question>
               <Answer>
-                <Button onClick={postAnswerA}>
+                <Button onClick={pressButtonA}>
                   {survey && surveyContent.slice(questionIdx, firstAnswer)}
                 </Button>
                 <p>vs</p>
-                <Button onClick={postAnswerB}>{survey && surveyContent.slice(firstAnswer)}</Button>
-                <div className="WrapBottomButton">
-                  <Retest onClick={resetTest}>다시 검사하기</Retest>
-                </div>
+                <Button onClick={pressButtonB}>{survey && surveyContent.slice(firstAnswer)}</Button>
               </Answer>
+              <Retest onClick={resetTest}>다시 검사하기</Retest>
             </WrapMain>
             <LogoImage src={imgUrl.logo} />
           </SurveyBackground>
@@ -144,15 +153,33 @@ const SurveyBackground = styled.div`
 
 const Header = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 80px 50px 0;
   color: rgba(0, 0, 0, 0.4);
   font-size: 18px;
   font-weight: bold;
+
+  h1 {
+    color: black;
+    font-size: 30px;
+  }
+
+  .surveyName {
+    margin: 25px 0 50px 0;
+    font-size: 22px;
+
+    .surveyNumber {
+      margin-left: 5px;
+      color: ${theme.pink};
+    }
+  }
 `;
 
 const WrapMain = styled.section`
-  padding-top: 80px;
+  ${flexCenter};
+  flex-direction: column;
 `;
 
 const Question = styled.div`
@@ -161,7 +188,7 @@ const Question = styled.div`
 
   h1 {
     .emphasis {
-      width: 380px;
+      width: 600px;
       padding: 35px;
       border-radius: 50px;
       color: #fff;
@@ -173,23 +200,25 @@ const Question = styled.div`
 `;
 
 const Answer = styled.div`
-  ${flexCenter};
-  flex-direction: column;
-  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  padding: 80px 0 50px 0;
 
   p {
-    padding: 10px 0;
+    padding: 20px 0;
     color: rgba(0, 0, 0, 0.4);
     font-size: 24px;
   }
 `;
 
 const Button = styled.button`
-  width: 360px;
-  padding: 30px 50px;
+  width: 300px;
+  margin: 0 20px;
+  height: 300px;
+  padding: 30px 30px;
   border: 2px solid rgba(0, 0, 0, 0.08);
   border-radius: 50px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   outline-style: none;
 
@@ -207,7 +236,7 @@ const Button = styled.button`
 const Retest = styled.button`
   width: 200px;
   height: 60px;
-  margin: 50px 10px 0 20px;
+  margin-top: 20px;
   padding: 10px 20px;
   border: none;
   border-radius: 50px;
