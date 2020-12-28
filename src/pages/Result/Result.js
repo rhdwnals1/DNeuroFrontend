@@ -1,8 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RESULT_DATA } from "../../config";
-import { boxShadow, justifyCenter } from "../../styles/CommonStyle";
+import {
+  boxShadow,
+  justifyCenter,
+  imgUrl,
+  theme,
+} from "../../styles/CommonStyle";
 
 const Result = () => {
   const history = useHistory();
@@ -31,7 +36,7 @@ const Result = () => {
     <Fragment>
       <WrapResult>
         <Logo>
-          <img src="/images/JM/dneuro.png" alt="Logo" />
+          <img src={imgUrl.logo} alt="Logo" />
         </Logo>
         <Explain>
           <div>나의 유형은</div>
@@ -67,8 +72,8 @@ const Logo = styled.div`
   ${justifyCenter}
 
   img {
-    width: 130px;
-    height: 40px;
+    width: 110px;
+    height: 120px;
   }
 `;
 
@@ -82,7 +87,7 @@ const Explain = styled.div`
       color: rgba(0, 0, 0, 0.3);
     }
     &:last-child {
-      margin-top: 10px;
+      margin-top: 20px;
       font-size: 25px;
       font-weight: 800;
       color: #222;
@@ -127,7 +132,7 @@ const Container = styled.div`
 
   div {
     &:first-child {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: -0.5px;
       color: #222;
@@ -138,7 +143,7 @@ const Container = styled.div`
       font-size: 45px;
       font-weight: 700;
       letter-spacing: -0.5px;
-      color: #becc01;
+      color: ${theme.pink};
     }
   }
 `;
@@ -148,15 +153,15 @@ const Button = styled.div`
   flex-direction: column;
   width: 410px;
   height: 71px;
-  margin: 20px auto 30px;
+  margin: 40px auto;
   text-align: center;
   justify-content: center;
   font-size: 20px;
   font-weight: 700;
-  background-color: #f2f2f2;
-  color: #222;
+  background-color: ${theme.pink};
+  color: #fff;
   border: 1px solid #f2f2f2;
-  border-radius: 20px;
+  border-radius: 30px;
 
   &:hover {
     cursor: pointer;
