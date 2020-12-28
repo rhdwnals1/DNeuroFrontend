@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { boxShadow } from "../../styles/CommonStyle";
-import { theme } from "../../styles/CommonStyle";
+import { theme, imgUrl } from "../../styles/CommonStyle";
 import styled from "styled-components";
 
 const Main = () => {
@@ -18,7 +18,6 @@ const Main = () => {
       setLogin(false);
     }
   });
-
   useEffect(() => {
     if (isToken) {
       setToken(true);
@@ -50,7 +49,7 @@ const Main = () => {
   return (
     <WrapMain>
       <Logo>
-        <img src="/images/JM/dneurologo.png" alt="dneuro" />
+        <img src={imgUrl.logo} alt="dneuro" />
       </Logo>
       <Title>
         내 성격에 딱!
@@ -78,7 +77,6 @@ const Main = () => {
 export default Main;
 
 const WrapMain = styled.section`
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -95,7 +93,6 @@ const Logo = styled.footer`
 `;
 
 const Title = styled.div`
-  /* margin-top: 17vh; */
   margin: 40px auto 45px;
   padding: 0 10px;
   font-size: 32px;
@@ -166,7 +163,7 @@ const SignUp = styled.div`
   &:hover {
     cursor: pointer;
     width: 80px;
-    height: 3px;
+    height: 30px;
     border: 1px solid pink;
     border-radius: 15px;
     color: #fff;
