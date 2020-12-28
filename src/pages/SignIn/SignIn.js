@@ -122,7 +122,7 @@ const Button = styled.div`
   padding: 13px 15px;
   background-color: ${theme.pink};
   border: 1px solid ${theme.pink};
-  border-radius: 20px;
+  border-radius: 25px;
   color: #fff;
   font-size: 17px;
   line-height: 1.41;
@@ -141,16 +141,18 @@ const SignUp = styled.div`
   text-align: center;
   color: #424242;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
   &:hover {
     cursor: pointer;
     width: 80px;
-    height: 20px;
+    height: 30px;
+    padding-top: 4px;
     border: 1px solid ${theme.pink};
     border-radius: 15px;
     color: #ffffff;
     background-color: ${theme.pink};
+    ${boxShadow}
   }
 `;
 export default SignIn;
