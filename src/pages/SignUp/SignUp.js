@@ -1,7 +1,7 @@
-import React, { Component, Fragment, useEffect, useState } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import React, { Fragment, useEffect, useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
 import { justifyCenter, theme } from "../../styles/CommonStyle";
-import { SIGNUP_API, AWS_API, SIGNUP_DATA } from "../../config";
+import { VER1_API, VER2_API } from "../../config";
 import { useHistory, Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -22,26 +22,36 @@ const SignUp = () => {
   const birthValue = year + "-" + month + "-" + day;
 
   useEffect(() => {
-    fetch(SIGNUP_DATA)
+    fetch(
+      //`${VER1_API}/user/signup`
+      `${VER2_API}/user/signup`
+    )
       .then((res) => res.json())
       .then((res) => setNation(res.nationality));
-    fetch(SIGNUP_DATA)
+    fetch(
+      //`${VER1_API}/user/signup`
+      `${VER2_API}/user/signup`
+    )
       .then((res) => res.json())
       .then((res) => setMonthBirth(res.birthMonth));
   }, []);
 
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(`http://13.125.154.100:8000/user/signup`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: idValue,
-        password: pw,
-        country: nationality,
-        sex: gender,
-        birthday: birthValue,
-      }),
-    })
+    fetch(
+      // `${VER1_API}/user/signup`
+      `${VER2_API}/user/signup`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: idValue,
+          password: pw,
+          country: nationality,
+          sex: gender,
+          birthday: birthValue,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         console.log(res.message);
