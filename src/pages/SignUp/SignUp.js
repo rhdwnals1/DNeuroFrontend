@@ -23,14 +23,14 @@ const SignUp = () => {
 
   useEffect(() => {
     fetch(
-      //`${VER1_API}/user/signup`
-      `${VER2_API}/user/signup`
+      `${VER1_API}/user/signup`
+      // `${VER2_API}/user/signup`
     )
       .then((res) => res.json())
       .then((res) => setNation(res.nationality));
     fetch(
-      //`${VER1_API}/user/signup`
-      `${VER2_API}/user/signup`
+      `${VER1_API}/user/signup`
+      // `${VER2_API}/user/signup`
     )
       .then((res) => res.json())
       .then((res) => setMonthBirth(res.birthMonth));
@@ -39,8 +39,8 @@ const SignUp = () => {
   const goToMain = (e) => {
     e.preventDefault();
     fetch(
-      // `${VER1_API}/user/signup`
-      `${VER2_API}/user/signup`,
+      `${VER1_API}/user/signup`,
+      // `${VER2_API}/user/signup`,
       {
         method: "POST",
         body: JSON.stringify({

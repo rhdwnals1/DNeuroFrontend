@@ -1,10 +1,9 @@
 /* eslint-disable no-const-assign */
 /* eslint-disable eqeqeq */
-import { cleanup } from "@testing-library/react";
 import React, { Fragment, useEffect, useState } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { useHistory } from "react-router-dom";
-import { VER1_API, VER2_API } from "../../config";
+import { VER1_API, VER2_API, SURVEY_DATA } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 
 const Survey = () => {
@@ -16,14 +15,17 @@ const Survey = () => {
 
   const surveyId = survey && survey.id;
   const surveyContent = survey && survey.content;
-  const questionIdx = surveyContent && surveyContent.indexOf("A");
-  const firstAnswer = surveyContent && surveyContent.indexOf("B");
+  const questionIdx = surveyContent && surveyContent.indexOf("|") + 1;
+  console.log(questionIdx);
+  const firstAnswer = surveyContent && surveyContent.indexOf("|", 45);
+  console.log(firstAnswer);
   const testTime = +currentTime - +oldTime;
 
   const getSurveyData = () => {
     fetch(
       // `${VER1_API}/survey/start`,
       `${VER2_API}/survey/start`,
+      // `${SURVEY_DATA}`,
       {
         method: "GET",
         headers: {
@@ -41,7 +43,7 @@ const Survey = () => {
 
   const postAnswerA = () => {
     fetch(
-      // `${VER1_API}/survey/input`
+      // `${VER1_API}/survey/input`,
       `${VER2_API}/survey/input`,
       {
         method: "POST",
@@ -59,7 +61,7 @@ const Survey = () => {
 
   const postAnswerB = () => {
     fetch(
-      // `${VER1_API}/survey/input`
+      // `${VER1_API}/survey/input`,
       `${VER2_API}/survey/input`,
       {
         method: "POST",
@@ -102,8 +104,6 @@ const Survey = () => {
     setOldTime(countTime());
   }, []);
 
-  console.log(testTime);
-
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
@@ -118,7 +118,9 @@ const Survey = () => {
             <WrapMain>
               <Question>
                 <h1>
-                  <div className="emphasis">{survey && surveyContent.slice(0, questionIdx)}</div>
+                  <div className="emphasis">
+                    {survey && surveyContent.slice(0, questionIdx - 1)}
+                  </div>
                 </h1>
               </Question>
               <Answer>
@@ -126,7 +128,9 @@ const Survey = () => {
                   {survey && surveyContent.slice(questionIdx, firstAnswer)}
                 </Button>
                 <p>vs</p>
-                <Button onClick={pressButtonB}>{survey && surveyContent.slice(firstAnswer)}</Button>
+                <Button onClick={pressButtonB}>
+                  {survey && surveyContent.slice(firstAnswer + 1)}
+                </Button>
               </Answer>
               <Retest onClick={resetTest}>다시 검사하기</Retest>
             </WrapMain>
