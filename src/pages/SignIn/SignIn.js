@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { VER1_API, VER2_API } from "../../config";
 import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import styled from "styled-components";
+
 const SignIn = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -10,8 +11,8 @@ const SignIn = () => {
   const goToMain = (e) => {
     e.preventDefault();
     fetch(
-      // `${VER1_API}/user/signin`,
-      `${VER2_API}/user/signin`,
+      `${VER1_API}/user/signin`,
+      // `${VER2_API}/user/signin`,
       {
         method: "POST",
         body: JSON.stringify({
