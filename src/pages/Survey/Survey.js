@@ -17,22 +17,17 @@ const Survey = () => {
   const surveyContent = survey && survey.content;
   const questionIdx = surveyContent && surveyContent.indexOf("|") + 1;
   console.log(questionIdx);
-  const firstAnswer = surveyContent && surveyContent.indexOf("|", 45);
+  const firstAnswer = surveyContent && surveyContent.indexOf("|", questionIdx + 1);
   console.log(firstAnswer);
   const testTime = +currentTime - +oldTime;
 
   const getSurveyData = () => {
-    fetch(
-      // `${VER1_API}/survey/start`,
-      `${VER2_API}/survey/start`,
-      // `${SURVEY_DATA}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    )
+    fetch(`${VER1_API}/survey/start`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((result) => {
         setProgress(result.progress);
@@ -42,39 +37,31 @@ const Survey = () => {
   };
 
   const postAnswerA = () => {
-    fetch(
-      // `${VER1_API}/survey/input`,
-      `${VER2_API}/survey/input`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          survey_id: survey && survey.id,
-          answer: "A",
-          time: testTime,
-        }),
-      }
-    );
+    fetch(`${VER1_API}/survey/input`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        survey_id: survey && survey.id,
+        answer: "A",
+        time: testTime,
+      }),
+    });
   };
 
   const postAnswerB = () => {
-    fetch(
-      // `${VER1_API}/survey/input`,
-      `${VER2_API}/survey/input`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          survey_id: surveyId,
-          answer: "B",
-          time: testTime,
-        }),
-      }
-    );
+    fetch(`${VER1_API}/survey/input`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        survey_id: surveyId,
+        answer: "B",
+        time: testTime,
+      }),
+    });
   };
 
   const countTime = () => {
@@ -96,7 +83,12 @@ const Survey = () => {
   };
 
   const resetTest = () => {
-    getSurveyData();
+    fetch(`${VER1_API}/survey/reset`, {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
   };
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 export const VER1_API = `http://13.125.154.100:8000`;
-export const VER2_API = `http://10.177.198.64:8000`;
 
 export const SIGNUP_DATA = `/data/signup.json`;
 export const SURVEY_DATA = "/data/survey.json";
