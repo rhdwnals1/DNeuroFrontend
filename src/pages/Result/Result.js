@@ -36,7 +36,7 @@ const Result = () => {
     <Fragment>
       <WrapResult>
         <Logo>
-          <img src={imgUrl.logo} alt="Logo" />
+          <img src="/images/JM/dneurologo.png" alt="Logo" />
         </Logo>
         <Explain>
           <div>나의 유형은</div>

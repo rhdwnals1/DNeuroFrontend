@@ -1,26 +1,27 @@
 import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { VER1_API, VER2_API } from "../../config";
-import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import styled from "styled-components";
+import { LOGINIMAGE } from "../SignIn/data/data";
+import { VER1_API, KAKAO_API } from "../../config";
+import { boxShadow, theme } from "../../styles/CommonStyle";
+
+const { Kakao } = window;
 
 const SignIn = () => {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //일반 로그인
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(
-      `${VER1_API}/user/signin`,
-      // `${VER2_API}/user/signin`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      }
-    )
+    fetch(`${VER1_API}/user/signin`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
       .then((res) => res.json())
       .then((res) => {
         console.log("백엔드 : ", res);
@@ -33,17 +34,53 @@ const SignIn = () => {
         }
       });
   };
+
+  // const kakaoToken = localStorage.kakao_2d5e6d01d349bd67f12aeeb71f46cb15;
+
+  //카카오톡 로그인
+  const goToKakao = () => {
+    Kakao.Auth.login({
+      success: function (authObj) {
+        fetch(`${KAKAO_API}`, {
+          method: "POST",
+          body: JSON.stringify({
+            access_token: authObj.access_token,
+          }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            // 카카오 응답 테스트 console.log
+            console.log("res : ", res);
+            // if (!localStorage.Kakao_token) {
+            localStorage.setItem("Kakao_token", res.access_token);
+            if (res.access_token) {
+              alert("Dneuro에 오신걸 환영합니다!");
+              history.push("/Main");
+              //   }
+              // } else {
+              //   alert("이미 로그인 되어 있습니다.");
+              //   history.push({ pathname: "/Main", state: { res } });
+            }
+          });
+      },
+      fail: function (err) {
+        alert(JSON.stringify(err));
+      },
+    });
+  };
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+
   return (
     <Fragment>
       <WrapSignIn>
         <Logo>
-          <img src={imgUrl.logo} alt="logo" />
+          <img src="/images/JM/dneurologo.png" alt="logo" />
         </Logo>
         <Login>
           <input
@@ -67,10 +104,21 @@ const SignIn = () => {
         <SignUp>
           <Link to="/signup">회원가입</Link>
         </SignUp>
+        <SNS>SNS 계정으로 로그인 하기</SNS>
+        <SnsContainer>
+          {LOGINIMAGE.map((img) => {
+            return (
+              <SnsLogin onClick={img.alt === "카카오톡" ? goToKakao : ""}>
+                <img key={img.id} src={img.src} alt={img.alt} />
+              </SnsLogin>
+            );
+          })}
+        </SnsContainer>
       </WrapSignIn>
     </Fragment>
   );
 };
+
 const WrapSignIn = styled.section`
   display: flex;
   flex-direction: column;
@@ -148,6 +196,7 @@ const SignUp = styled.div`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
+
   &:hover {
     cursor: pointer;
     width: 80px;
@@ -160,4 +209,48 @@ const SignUp = styled.div`
     ${boxShadow}
   }
 `;
+
+const SNS = styled.div`
+  text-align: center;
+  font-size: 14px;
+  color: #424242;
+  font-weight: 500;
+  margin: 30px auto 10px;
+
+  &:hover {
+    cursor: pointer;
+    width: 180px;
+    height: 30px;
+    padding-top: 7px;
+    border: 1px solid ${theme.pink};
+    border-radius: 15px;
+    color: #ffffff;
+    background-color: ${theme.pink};
+    ${boxShadow}
+  }
+`;
+
+const SnsContainer = styled.section`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+`;
+
+const SnsLogin = styled.div`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  img {
+    border-radius: 50%;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export default SignIn;
