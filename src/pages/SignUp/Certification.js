@@ -62,6 +62,8 @@ const Certification = ({ history }) => {
   const goToSignUp = () => {
     if (authResult === "SUCCESS") {
       history.push("/SignUp");
+    } else {
+      alert("문자인증을 해야 합니다.");
     }
   };
 
