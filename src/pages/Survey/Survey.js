@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useHistory } from "react-router-dom";
-import { VER1_API, VER2_API, SURVEY_DATA } from "../../config";
+import { VER1_API } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 
 const Survey = () => {
@@ -16,10 +16,15 @@ const Survey = () => {
   const surveyId = survey && survey.id;
   const surveyContent = survey && survey.content;
   const questionIdx = surveyContent && surveyContent.indexOf("|") + 1;
-  console.log(questionIdx);
   const firstAnswer = surveyContent && surveyContent.indexOf("|", questionIdx + 1);
-  console.log(firstAnswer);
-  const testTime = +currentTime - +oldTime;
+
+  const testTime = () => {
+    const time = +currentTime - +oldTime;
+    if (time > 0) {
+      return time;
+    }
+  };
+  console.log(testTime());
 
   const getSurveyData = () => {
     fetch(`${VER1_API}/survey/start`, {
@@ -32,7 +37,6 @@ const Survey = () => {
       .then((result) => {
         setProgress(result.progress);
         setSurvey(result.survey);
-        console.log(result);
       });
   };
 
@@ -71,7 +75,7 @@ const Survey = () => {
 
   const pressButtonA = () => {
     postAnswerA();
-    // setCurrentTime(countTime());
+    setCurrentTime(countTime());
     if (survey && survey.id === 13) {
       history.push("/Result");
     }
@@ -79,7 +83,7 @@ const Survey = () => {
 
   const pressButtonB = () => {
     postAnswerB();
-    // setCurrentTime(countTime());
+    setCurrentTime(countTime());
   };
 
   const resetTest = () => {

@@ -34,7 +34,7 @@ const Main = () => {
     history.push("/SignIn");
   };
   const goToSignUp = () => {
-    history.push("/SignUp");
+    history.push("/Certification");
   };
 
   const goToLogout = () => {
