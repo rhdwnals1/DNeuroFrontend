@@ -41,25 +41,26 @@ const SignIn = () => {
   const goToKakao = () => {
     Kakao.Auth.login({
       success: function (authObj) {
+        console.log(authObj);
         fetch(`${KAKAO_API}`, {
           method: "POST",
-          body: JSON.stringify({
-            access_token: authObj.access_token,
-          }),
+          headers: {
+            Authorization: authObj.access_token,
+          },
         })
           .then((res) => res.json())
           .then((res) => {
             // 카카오 응답 테스트 console.log
             console.log("res : ", res);
-            // if (!localStorage.Kakao_token) {
-            localStorage.setItem("Kakao_token", res.access_token);
-            if (res.access_token) {
-              alert("Dneuro에 오신걸 환영합니다!");
-              history.push("/Main");
-              //   }
-              // } else {
-              //   alert("이미 로그인 되어 있습니다.");
-              //   history.push({ pathname: "/Main", state: { res } });
+            if (!localStorage.Kakao_token) {
+              localStorage.setItem("Kakao_token", res.token);
+              if (res.token) {
+                alert("Dneuro에 오신걸 환영합니다!");
+                history.push("/Main");
+              }
+            } else {
+              alert("이미 로그인 되어 있습니다.");
+              history.push({ pathname: "/Main", state: { res } });
             }
           });
       },
