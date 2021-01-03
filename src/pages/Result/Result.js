@@ -2,12 +2,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RESULT_DATA } from "../../config";
-import {
-  boxShadow,
-  justifyCenter,
-  imgUrl,
-  theme,
-} from "../../styles/CommonStyle";
+import { boxShadow, justifyCenter, theme } from "../../styles/CommonStyle";
+import HalfDoughnut from "./Component/HalfDoughnut";
 
 const Result = () => {
   const history = useHistory();
@@ -16,21 +12,20 @@ const Result = () => {
   };
 
   const [content, setContent] = useState();
-  const [percent, setPercent] = useState();
 
   useEffect(() => {
     fetch(`${RESULT_DATA}`)
       .then((res) => res.json())
       .then((res) => {
-        setContent(res.data.content);
-        setPercent(res.data.percent);
+        setContent(res);
       });
   }, []);
 
-  const myType = content && content.slice(0, content.indexOf("\r"));
-  const firstContent =
-    content && content.slice(content.indexOf("\r"), content.lastIndexOf("\r"));
-  const secondContent = content && content.slice(content.lastIndexOf("\r"));
+  const loss = content && content.loss_evasion_evaluation;
+  const risk = content && content.risk_evasion_evaluation;
+  const resultObj = content && content.evasion_grade;
+  const lossData = content && resultObj[loss];
+  const riskData = content && resultObj[risk];
 
   return (
     <Fragment>
@@ -39,20 +34,28 @@ const Result = () => {
           <img src="/images/JM/dneurologo.png" alt="Logo" />
         </Logo>
         <Explain>
-          <div>나의 유형은</div>
-          <div>{myType}</div>
+          <div>나의 유형은 ?</div>
         </Explain>
-        <Img>
-          <img src="/images/JM/3.png" alt="" />
-        </Img>
-        <Content>
-          <div>{firstContent}</div>
-          <div>{secondContent}</div>
-        </Content>
-        <Container>
-          <div>MBTI를 한 사람 중 나와 같은 유형은?</div>
-          <div>{percent}%</div>
-        </Container>
+        <Video>
+          <video
+            src="https://videos.files.wordpress.com/hQlgtevQ/dolar-man-1024-video_hd.mp4"
+            autoplay
+            loop
+            muted="muted"
+            playsInline
+            controlsList="nodownload"
+          />
+        </Video>
+        <Doughnut>
+          <div className="HalfDoughnut">
+            <HalfDoughnut
+              lossData={lossData}
+              riskData={riskData}
+              loss={loss}
+              risk={risk}
+            />
+          </div>
+        </Doughnut>
         <Button onClick={goToMain}>테스트 다시하기</Button>
       </WrapResult>
     </Fragment>
@@ -66,6 +69,7 @@ const WrapResult = styled.section`
   flex-direction: column;
   width: 600px;
   margin: 50px auto;
+  background-color: rgba(255, 255, 224, 0.2);
 `;
 
 const Logo = styled.div`
@@ -80,19 +84,23 @@ const Logo = styled.div`
 const Explain = styled.div`
   div {
     ${justifyCenter}
-    &:first-child {
-      margin-top: 35px;
-      font-size: 18px;
-      font-weight: 700;
-      color: rgba(0, 0, 0, 0.3);
-    }
-    &:last-child {
-      margin-top: 20px;
-      font-size: 25px;
-      font-weight: 800;
-      color: #222;
-    }
+    margin-top: 35px;
+    font-size: 29px;
+    font-weight: 800;
+    color: rgba(0, 0, 0, 0.7);
   }
+`;
+
+const Video = styled.div`
+  margin: 0 auto;
+  video {
+    width: 300px;
+    height: 300px;
+  }
+`;
+
+const Doughnut = styled.div`
+  margin: 0 auto;
 `;
 
 const Img = styled.div`
