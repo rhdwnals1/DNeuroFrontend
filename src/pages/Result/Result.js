@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { RESULT_DATA } from "../../config";
+import { RESULT_DATA, SJ_API, HS_API } from "../../config";
 import { boxShadow, justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
 import HalfDoughnut from "./Component/HalfDoughnut";
 

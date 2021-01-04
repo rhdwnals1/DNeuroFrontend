@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { useHistory } from "react-router-dom";
-import { VER1_API } from "../../config";
+import { SJ_API } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import ProgressBar from "./components/ProgressBar";
 
@@ -13,8 +13,6 @@ const Survey = () => {
   const [survey, setSurvey] = useState();
   const [oldTime, setOldTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [result, setResult] = useState();
-  const [value, setValue] = useState(0);
 
   const surveyId = survey && survey.id;
   const surveyContent = survey && survey.content;
@@ -30,7 +28,7 @@ const Survey = () => {
   // console.log(testTime());
 
   const getSurveyData = () => {
-    fetch(`${VER1_API}/survey/start`, {
+    fetch(`${SJ_API}/survey/start`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -41,12 +39,11 @@ const Survey = () => {
         console.log(result);
         setProgress(result.progress);
         setSurvey(result.survey);
-        // setResult(result);
       });
   };
 
   const postAnswerA = () => {
-    fetch(`${VER1_API}/survey/input`, {
+    fetch(`${SJ_API}/survey/input`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -60,7 +57,7 @@ const Survey = () => {
   };
 
   const postAnswerB = () => {
-    fetch(`${VER1_API}/survey/input`, {
+    fetch(`${SJ_API}/survey/input`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -95,7 +92,7 @@ const Survey = () => {
   };
 
   const resetTest = () => {
-    fetch(`${VER1_API}/survey/reset`, {
+    fetch(`${SJ_API}/survey/reset`, {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
@@ -105,8 +102,8 @@ const Survey = () => {
 
   useEffect(() => {
     getSurveyData();
-    setOldTime(countTime());
-  }, []);
+    // setOldTime(countTime());
+  }, [survey]);
 
   return (
     <ThemeProvider theme={theme}>

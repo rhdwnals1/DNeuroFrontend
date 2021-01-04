@@ -82,5 +82,35 @@
       "id" : 11,
       "month" : "12"
     }
+  ],
+  "mail": [
+    {
+      "id": 0,
+      "Email": "naver.com"
+    },
+    {
+      "id": 1,
+      "Email": "gmail.com"
+    },
+    {
+      "id": 2,
+      "Email": "daum.net"
+    },
+    {
+      "id": 3,
+      "Email": "yahoo.com"
+    },
+    {
+      "id": 4,
+      "Email": "nate.com"
+    },
+    {
+      "id": 5,
+      "Email": "hotmail.com"
+    },
+    {
+      "id": 6,
+      "Email": "outlook.com"
+    }
   ]
 }

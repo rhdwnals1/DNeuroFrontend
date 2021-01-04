@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LOGINIMAGE } from "../SignIn/data/data";
-import { VER1_API, KAKAO_API } from "../../config";
+import { SJ_API, HS_API } from "../../config";
 import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 
 const { Kakao } = window;
@@ -15,7 +15,7 @@ const SignIn = () => {
   //일반 로그인
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(`${VER1_API}/user/signin`, {
+    fetch(`${SJ_API}/user/signin`, {
       method: "POST",
       body: JSON.stringify({
         email: email,
@@ -42,7 +42,7 @@ const SignIn = () => {
     Kakao.Auth.login({
       success: function (authObj) {
         console.log(authObj);
-        fetch(`${KAKAO_API}`, {
+        fetch(`${HS_API}/user/kakao`, {
           method: "POST",
           headers: {
             Authorization: authObj.access_token,
@@ -103,7 +103,7 @@ const SignIn = () => {
           <div className="content">로그인</div>
         </Button>
         <SignUp>
-          <Link to="/signup">회원가입</Link>
+          <Link to="/Certification">회원가입</Link>
         </SignUp>
         <SNS>SNS 계정으로 로그인 하기</SNS>
         <SnsContainer>
