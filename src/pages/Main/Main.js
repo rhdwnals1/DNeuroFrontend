@@ -52,7 +52,7 @@ const Main = () => {
   return (
     <WrapMain>
       <Logo>
-        <img src="/images/JM/dneurologo.png" alt="dneuro" />
+        <img src={imgUrl.logo} alt="dneuro" />
       </Logo>
       <Title>
         내 성격에 딱!
