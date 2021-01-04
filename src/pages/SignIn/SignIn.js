@@ -53,7 +53,7 @@ const SignIn = () => {
             // 카카오 응답 테스트 console.log
             console.log("res : ", res);
             if (!localStorage.Kakao_token) {
-              localStorage.setItem("Kakao_token", res.token);
+              localStorage.setItem("token", res.token);
               if (res.token) {
                 alert("Dneuro에 오신걸 환영합니다!");
                 history.push("/Main");

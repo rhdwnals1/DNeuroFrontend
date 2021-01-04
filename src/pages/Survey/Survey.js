@@ -38,6 +38,7 @@ const Survey = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
         setProgress(result.progress);
         setSurvey(result.survey);
         // setResult(result);
