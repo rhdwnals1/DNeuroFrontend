@@ -9,17 +9,19 @@ const Main = () => {
   const [token, setToken] = useState(true);
 
   const isLogin = localStorage.getItem("token");
+  const isKakaoLogin = localStorage.getItem("Kakao_token");
   const isToken = localStorage.getItem("token");
+  const isKakaoToken = localStorage.getItem("Kakao_token");
 
   useEffect(() => {
-    if (isLogin) {
+    if (isLogin || isKakaoLogin) {
       setLogin(true);
     } else {
       setLogin(false);
     }
   });
   useEffect(() => {
-    if (isToken) {
+    if (isToken || isKakaoToken) {
       setToken(true);
     } else {
       setToken(false);
@@ -39,6 +41,7 @@ const Main = () => {
 
   const goToLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("Kakao_token");
     history.push("/Main");
   };
 
@@ -49,7 +52,7 @@ const Main = () => {
   return (
     <WrapMain>
       <Logo>
-        <img src={imgUrl.logo} alt="dneuro" />
+        <img src="/images/JM/dneurologo.png" alt="dneuro" />
       </Logo>
       <Title>
         내 성격에 딱!
