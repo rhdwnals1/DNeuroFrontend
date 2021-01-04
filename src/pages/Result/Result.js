@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RESULT_DATA } from "../../config";
-import { boxShadow, justifyCenter, theme } from "../../styles/CommonStyle";
+import { boxShadow, justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
 import HalfDoughnut from "./Component/HalfDoughnut";
 
 const Result = () => {
@@ -31,7 +31,7 @@ const Result = () => {
     <Fragment>
       <WrapResult>
         <Logo>
-          <img src="/images/JM/dneurologo.png" alt="Logo" />
+          <img src={imgUrl.logo} alt="Logo" />
         </Logo>
         <Explain>
           <div>나의 유형은 ?</div>
@@ -48,12 +48,7 @@ const Result = () => {
         </Video>
         <Doughnut>
           <div className="HalfDoughnut">
-            <HalfDoughnut
-              lossData={lossData}
-              riskData={riskData}
-              loss={loss}
-              risk={risk}
-            />
+            <HalfDoughnut lossData={lossData} riskData={riskData} loss={loss} risk={risk} />
           </div>
         </Doughnut>
         <Button onClick={goToMain}>테스트 다시하기</Button>
