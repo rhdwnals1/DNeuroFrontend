@@ -25,7 +25,7 @@ const Certification = ({ history }) => {
   };
 
   const postPhoneNumber = () => {
-    fetch(`${SMS_API}/user/sms`, {
+    fetch(`${SMS_API}`, {
       method: "POST",
       body: JSON.stringify({
         phone_number: phoneNumber,
@@ -41,7 +41,7 @@ const Certification = ({ history }) => {
   };
 
   const checkValidation = () => {
-    fetch(`${SMS_API}/user/sms?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
+    fetch(`${SMS_API}?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
       method: "GET",
       // body: JSON.stringify({
       //   auth_number: certifiedNumber,

@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { LOGINIMAGE } from "../SignIn/data/data";
 import { VER1_API, KAKAO_API } from "../../config";
-import { boxShadow, theme } from "../../styles/CommonStyle";
+import { boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 
 const { Kakao } = window;
 
@@ -81,7 +81,7 @@ const SignIn = () => {
     <Fragment>
       <WrapSignIn>
         <Logo>
-          <img src="/images/JM/dneurologo.png" alt="logo" />
+          <img src={imgUrl.logo} alt="logo" />
         </Logo>
         <Login>
           <input

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { justifyCenter, theme } from "../../styles/CommonStyle";
+import { justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
 import { VER1_API, SIGNUP_DATA } from "../../config";
 import { useHistory, Link } from "react-router-dom";
 
@@ -107,7 +107,7 @@ const SignUp = () => {
         <Background>
           <WrapSignUp>
             <Header>
-              <HeaderImage src="https://lh3.googleusercontent.com/VbAt1Idbi-4NHicLjzGdgRFA9hd8hoaOk6SGD2be-BOrNzjlHcHSefupjSDPDkT3M2U40Eu2YOhY9wvAr_F_P7ZI9NOFAuUHvaliXyZ6ap_qAkV2fI2IDKHw17c7ULEL_JcLmmbQTgP2L6mPiiWPgjkXHB9pGL2RNX1TTLoa8E1gVMA2BvWWn7fD8u5kNqk4FYSSq096sZ6ZlEkNsjtezfuI_yd4XUCcEcWW1An41vgwIbcI8tyK-1ZV3IXjC8WF6KUyceEfgBa7hGuO-XDMGwGymBbl156OeEcz6k1VlNQsuunAw-jLll5CfzTmsYgGeuT2gn9U9pZnkAtq3QrK6Ub7AhfJC64MWlvTPbLy4eR1qTMd6w5fE_lvqo548Yx9BngYxUPyIKgA69aFygz5COyY3bZ73pKK1t9-t8OnOE2w27_gxIoIk2JLBfYlLOFlBJI73JPpHQ0AqJHz48Sm2XKjjDtCBDdnSJ4SEfdAJEjgYuGwbR8tpawVwsnQ4vinZvCZlgadMDbmdnU74LU28z4SOPeBvjUnwjN3x7jbUfQuBw--e0gVsdOwu08MiwBXWf_7LigknjlQ7c9RgybqG72e1RoZzcc_y3h6RNOY2nO71aOupVk3MX6u8MZ0mfOSUeLTxjSL1wyKgubbgqJult-E8rf95IiYL3F5T0GxF5qGi3_QxkCExcWpWweZeQ=w869-h980-no?authuser=0z" />
+              <HeaderImage src={imgUrl.logo} />
             </Header>
             <Body>
               <BodyHeader>회원가입</BodyHeader>
