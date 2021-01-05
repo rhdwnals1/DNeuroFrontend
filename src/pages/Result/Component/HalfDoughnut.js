@@ -1,6 +1,7 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
+import { textNumber } from "../../../styles/CommonStyle";
 
 function HalfDoughnut({ loss, risk, lossData, riskData }) {
   const state = {
@@ -40,15 +41,47 @@ function HalfDoughnut({ loss, risk, lossData, riskData }) {
       <div className="text">{lossData}</div>
       <div className="score">{loss}점</div>
       <Doughnut data={state} {...setting} />
+      <div className="minNumber">1</div>
+      <div className="maxNumber">7</div>
       <div className="risk">risk evasion evaluation</div>
       <div className="text">{riskData}</div>
       <div className="score">{risk}점</div>
       <Doughnut data={data} {...setting} />
+      <div className="min">1</div>
+      <div className="max">7</div>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .minNumber {
+    ${textNumber};
+    top: 395px;
+    left: -24px;
+  }
+
+  .maxNumber {
+    ${textNumber};
+    top: 395px;
+    right: -24px;
+  }
+
+  .min {
+    ${textNumber};
+    top: 865px;
+    left: -24px;
+  }
+
+  .max {
+    ${textNumber};
+    top: 865px;
+    right: -24px;
+  }
+
   .risk {
     margin-top: 50px;
     text-align: center;

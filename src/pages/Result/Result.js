@@ -1,8 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { RESULT_DATA, SJ_API, HS_API } from "../../config";
-import { boxShadow, justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
+import { SJ_API, HS_API } from "../../config";
+import {
+  boxShadow,
+  justifyCenter,
+  theme,
+  imgUrl,
+} from "../../styles/CommonStyle";
 import HalfDoughnut from "./Component/HalfDoughnut";
 
 const Result = () => {
@@ -14,9 +19,14 @@ const Result = () => {
   const [content, setContent] = useState();
 
   useEffect(() => {
-    fetch(`${RESULT_DATA}`)
+    fetch(`${SJ_API}/survey/result`, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         setContent(res);
       });
   }, []);
@@ -48,7 +58,12 @@ const Result = () => {
         </Video>
         <Doughnut>
           <div className="HalfDoughnut">
-            <HalfDoughnut lossData={lossData} riskData={riskData} loss={loss} risk={risk} />
+            <HalfDoughnut
+              lossData={lossData}
+              riskData={riskData}
+              loss={loss}
+              risk={risk}
+            />
           </div>
         </Doughnut>
         <Button onClick={goToMain}>테스트 다시하기</Button>

@@ -43,4 +43,11 @@ export const boxShadow = css`
     0 0 2px rgba(0, 0, 0, 0.24);
 `;
 
+export const textNumber = css`
+  font-size: 30px;
+  font-weight: 900;
+  position: absolute;
+  color: #6c6c6c;
+`;
+
 export default theme;
