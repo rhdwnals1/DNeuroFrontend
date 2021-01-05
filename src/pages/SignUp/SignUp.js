@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
-import { VER1_API, SIGNUP_DATA } from "../../config";
+import { SJ_API, SIGNUP_DATA } from "../../config";
 import { useHistory, Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -17,6 +17,7 @@ const SignUp = () => {
   const [nationality, setNationality] = useState("");
   const [nation, setNation] = useState([]);
   const [monthBirth, setMonthBirth] = useState([]);
+  const [mailList, setMailList] = useState([]);
 
   const idValue = id + "@" + email;
   const birthValue = year + "-" + month + "-" + day;
@@ -27,12 +28,17 @@ const SignUp = () => {
       .then((res) => setNation(res.nationality));
     fetch(SIGNUP_DATA)
       .then((res) => res.json())
-      .then((res) => setMonthBirth(res.birthMonth));
+      .then((res) => {
+        setMonthBirth(res.birthMonth);
+        setMailList(res.mail);
+      });
   }, []);
+
+  console.log(mailList);
 
   const goToMain = (e) => {
     e.preventDefault();
-    fetch(`${VER1_API}/user/signup`, {
+    fetch(`${SJ_API}/user/signup`, {
       method: "POST",
       body: JSON.stringify({
         email: idValue,
@@ -122,8 +128,11 @@ const SignUp = () => {
                     <span>@</span>
                     <EmailInput onChange={handleChangeEmail}>
                       <option>이메일을 선택해주세요</option>
-                      <option>naver.com</option>
-                      <option>gmail.com</option>
+                      {mailList &&
+                        mailList.map((mail) => {
+                          console.log(mail.Email);
+                          return <option>{mail.Email}</option>;
+                        })}
                     </EmailInput>
                   </WrapInput>
                 </WrapEmail>

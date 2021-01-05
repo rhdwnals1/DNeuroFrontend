@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { flexCenter, imgUrl, theme } from "../../styles/CommonStyle";
-import { SMS_API } from "../../config";
+import { SJ_API, HS_API } from "../../config";
 
 const Certification = ({ history }) => {
   const [userName, setUserName] = useState("");
@@ -25,7 +25,7 @@ const Certification = ({ history }) => {
   };
 
   const postPhoneNumber = () => {
-    fetch(`${SMS_API}`, {
+    fetch(`${HS_API}/user/sms`, {
       method: "POST",
       body: JSON.stringify({
         phone_number: phoneNumber,
@@ -41,7 +41,7 @@ const Certification = ({ history }) => {
   };
 
   const checkValidation = () => {
-    fetch(`${SMS_API}?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
+    fetch(`${HS_API}?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
       method: "GET",
       // body: JSON.stringify({
       //   auth_number: certifiedNumber,
