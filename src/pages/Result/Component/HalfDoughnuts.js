@@ -2,13 +2,13 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import styled from "styled-components";
 
-function HalfDoughnut({ loss }) {
-  const state = {
+function HalfDoughnut({ risk }) {
+  const data = {
     datasets: [
       {
-        data: [(100 / 7) * loss, 100 - (100 / 7) * loss],
-        backgroundColor: ["#fbcac9", "#dfdfdf"],
-        hoverBackgroundColor: ["#fbcac9", "#dfdfdf"],
+        data: [(100 / 7) * risk, 100 - (100 / 7) * risk],
+        backgroundColor: ["#8ca6ce", "#dfdfdf"],
+        hoverBackgroundColor: ["#8ca6ce", "#dfdfdf"],
       },
     ],
   };
@@ -24,11 +24,10 @@ function HalfDoughnut({ loss }) {
       responsiveAnimationDuration: 10,
     },
   };
-
   return (
     <Wrapper>
       <Half>
-        <Doughnut data={state} {...setting} />
+        <Doughnut data={data} {...setting} />
       </Half>
     </Wrapper>
   );
