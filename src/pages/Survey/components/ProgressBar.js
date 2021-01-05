@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../../styles/CommonStyle";
 
-const ProgressBar = ({ value, max, color, width }) => {
+const ProgressBar = ({ value, max, color, width, id }) => {
   ProgressBar.propTypes = {
     value: PropTypes.number.isRequired,
     max: PropTypes.number,
@@ -21,6 +21,7 @@ const ProgressBar = ({ value, max, color, width }) => {
     <Fragment>
       <Container color={color} width={width}>
         <progress value={value} max={max} />
+        <span>{id}/13</span>
       </Container>
     </Fragment>
   );
@@ -48,5 +49,11 @@ const Container = styled.div`
     height: 20px;
     border-radius: 10px;
     background-color: ${(props) => props.color};
+  }
+
+  span {
+    padding: 5px 0 0 10px;
+    font-size: 18px;
+    font-weight: bold;
   }
 `;
