@@ -6,26 +6,37 @@ import { useHistory } from "react-router-dom";
 import { SJ_API } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import ProgressBar from "./components/ProgressBar";
+import { number } from "prop-types";
 
 const Survey = () => {
   const history = useHistory();
-  const [progress, setProgress] = useState();
-  const [survey, setSurvey] = useState();
-  const [oldTime, setOldTime] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [result, setResult] = useState({});
+  const [oldTime, setOldTime] = useState();
+  const [currentTime, setCurrentTime] = useState();
 
-  const surveyId = survey && survey.id;
-  const surveyContent = survey && survey.content;
+  const surveyId = result.survey && result.survey.id;
+  const surveyContent = result.survey && result.survey.content;
   const questionIdx = surveyContent && surveyContent.indexOf("|") + 1;
   const firstAnswer = surveyContent && surveyContent.indexOf("|", questionIdx + 1);
 
-  // const testTime = () => {
-  //   const time = +currentTime - +oldTime;
-  //   if (time > 0) {
-  //     return time;
-  //   }
-  // };
-  // console.log(testTime());
+  const testTime = () => {
+    if (currentTime !== oldTime && currentTime > oldTime) {
+      const time = +currentTime - +oldTime;
+      return (time / 1000).toFixed(1);
+    }
+  };
+
+  const countTime = () => {
+    let getTime = new Date().getTime();
+    return getTime;
+  };
+
+  const timeResult = +testTime();
+
+  console.log(timeResult);
+  useEffect(() => {
+    getSurveyData();
+  }, []);
 
   const getSurveyData = () => {
     fetch(`${SJ_API}/survey/start`, {
@@ -36,9 +47,8 @@ const Survey = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
-        setProgress(result.progress);
-        setSurvey(result.survey);
+        setResult(result);
+        setOldTime(countTime());
       });
   };
 
@@ -49,11 +59,12 @@ const Survey = () => {
         Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        survey_id: survey && survey.id,
+        survey_id: result && result.survey.id,
         answer: "A",
-        time: 3,
+        time: timeResult,
       }),
     });
+    console.log("surveyID:", surveyId);
   };
 
   const postAnswerB = () => {
@@ -63,22 +74,19 @@ const Survey = () => {
         Authorization: localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        survey_id: surveyId,
+        survey_id: result && result.survey.id,
         answer: "B",
-        time: 3,
+        time: timeResult,
       }),
     });
-  };
-
-  const countTime = () => {
-    let getTime = new Date().getSeconds();
-    return getTime;
+    console.log("surveyID:", surveyId);
   };
 
   const pressButtonA = () => {
     postAnswerA();
     setCurrentTime(countTime());
-    if (survey && survey.id === 13) {
+    getSurveyData();
+    if (result && result.survey.id === 13) {
       history.push("/Result");
     }
   };
@@ -86,7 +94,8 @@ const Survey = () => {
   const pressButtonB = () => {
     postAnswerB();
     setCurrentTime(countTime());
-    if (survey && survey.id === 13) {
+    getSurveyData();
+    if (result && result.survey.id === 13) {
       history.push("/Result");
     }
   };
@@ -98,12 +107,8 @@ const Survey = () => {
         Authorization: localStorage.getItem("token"),
       },
     });
-  };
-
-  useEffect(() => {
     getSurveyData();
-    // setOldTime(countTime());
-  }, [survey]);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -113,25 +118,29 @@ const Survey = () => {
             <Header>
               <h1>Investment Risk Profiling</h1>
               <div className="surveyName">
-                Question<span className="surveyNumber">"{survey && survey.id}"</span>
+                Question<span className="surveyNumber">"{result.survey && result.survey.id}"</span>
               </div>
             </Header>
-            <ProgressBar value={(100 / 13) * (survey && survey.id)} max={100} />
+            <ProgressBar
+              value={(100 / 13) * (result.survey && result.survey.id)}
+              max={100}
+              id={result.survey && result.survey.id}
+            />
             <WrapMain>
               <Question>
                 <h1>
                   <div className="emphasis">
-                    {survey && surveyContent.slice(0, questionIdx - 1)}
+                    {result.survey && surveyContent.slice(0, questionIdx - 1)}
                   </div>
                 </h1>
               </Question>
               <Answer>
                 <Button onClick={pressButtonA}>
-                  {survey && surveyContent.slice(questionIdx, firstAnswer)}
+                  {result.survey && surveyContent.slice(questionIdx, firstAnswer)}
                 </Button>
                 <p>vs</p>
                 <Button onClick={pressButtonB}>
-                  {survey && surveyContent.slice(firstAnswer + 1)}
+                  {result.survey && surveyContent.slice(firstAnswer + 1)}
                 </Button>
               </Answer>
               <Retest onClick={resetTest}>다시 검사하기</Retest>
