@@ -9,8 +9,8 @@ const Main = () => {
   const [token, setToken] = useState(true);
 
   const isLogin = localStorage.getItem("token");
-  const isKakaoLogin = localStorage.getItem("Kakao_token");
   const isToken = localStorage.getItem("token");
+  const isKakaoLogin = localStorage.getItem("Kakao_token");
   const isKakaoToken = localStorage.getItem("Kakao_token");
 
   useEffect(() => {
@@ -32,9 +32,11 @@ const Main = () => {
   const goToSurvey = () => {
     history.push("/Survey");
   };
+
   const goToSignIn = () => {
     history.push("/SignIn");
   };
+
   const goToSignUp = () => {
     history.push("/Certification");
   };
@@ -63,7 +65,7 @@ const Main = () => {
       {token ? (
         <Test onClick={goToSurvey}>테스트 시작</Test>
       ) : (
-        <Test onClick={doNotEnter}> 테스트 시작</Test>
+        <Test onClick={doNotEnter}>테스트 시작</Test>
       )}
       <Container>
         {login ? (
