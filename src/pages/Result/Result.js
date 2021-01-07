@@ -3,12 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { textNumber } from "../../styles/CommonStyle";
 import { SJ_API, HS_API } from "../../config";
-import {
-  boxShadow,
-  justifyCenter,
-  theme,
-  imgUrl,
-} from "../../styles/CommonStyle";
+import { boxShadow, justifyCenter, theme, imgUrl } from "../../styles/CommonStyle";
 import HalfDoughnut from "./Component/HalfDoughnut";
 import HalfDoughnuts from "./Component/HalfDoughnuts";
 
@@ -28,7 +23,6 @@ const Result = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.mbti);
         setContent(res);
       });
   }, []);
@@ -41,13 +35,8 @@ const Result = () => {
 
   const titleData = content && content.mbti.slice(0, content.mbti.indexOf("|"));
   const firstContent =
-    content &&
-    content.mbti.slice(
-      content.mbti.indexOf("|") + 1,
-      content.mbti.lastIndexOf("|")
-    );
-  const secondContent =
-    content && content.mbti.slice(content.mbti.lastIndexOf("|") + 1);
+    content && content.mbti.slice(content.mbti.indexOf("|") + 1, content.mbti.lastIndexOf("|"));
+  const secondContent = content && content.mbti.slice(content.mbti.lastIndexOf("|") + 1);
 
   return (
     <Fragment>

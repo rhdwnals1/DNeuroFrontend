@@ -28,7 +28,8 @@ const SignIn = () => {
         if (res.token) {
           localStorage.setItem("token", `${res.token}`);
           alert("로그인에 성공하셨습니다.");
-          history.push({ pathname: "/Main", state: { res } });
+          // history.push({ pathname: "/Main", state: { res } });
+          window.location.replace("/Main");
         } else {
           alert("이메일 또는 비밀번호를 확인해주세요.");
         }
@@ -42,7 +43,7 @@ const SignIn = () => {
     Kakao.Auth.login({
       success: function (authObj) {
         console.log(authObj);
-        fetch(`${HS_API}/user/kakao`, {
+        fetch(`${SJ_API}/user/kakao`, {
           method: "POST",
           headers: {
             Authorization: authObj.access_token,
@@ -56,7 +57,8 @@ const SignIn = () => {
               localStorage.setItem("token", res.token);
               if (res.token) {
                 alert("Dneuro에 오신걸 환영합니다!");
-                history.push("/Main");
+                // history.push("/Main");
+                window.location.replace("/Main");
               }
             } else {
               alert("이미 로그인 되어 있습니다.");
