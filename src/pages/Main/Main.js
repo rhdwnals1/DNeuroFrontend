@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { boxShadow } from "../../styles/CommonStyle";
 import { theme, imgUrl } from "../../styles/CommonStyle";
+import Footer from "../Main/Component/Footer";
 import styled from "styled-components";
 
 const Main = () => {
@@ -71,11 +72,19 @@ const Main = () => {
         {login ? (
           <Login onClick={goToLogout}>로그아웃</Login>
         ) : (
-          <Login onClick={goToSignIn}>로그인</Login>
+          <Test onClick={doNotEnter}> 테스트 시작</Test>
         )}
-        <SignUp onClick={goToSignUp}>회원가입</SignUp>
-      </Container>
-    </WrapMain>
+        <Container>
+          {login ? (
+            <Login onClick={goToLogout}>로그아웃</Login>
+          ) : (
+            <Login onClick={goToSignIn}>로그인</Login>
+          )}
+          <SignUp onClick={goToSignUp}>회원가입</SignUp>
+        </Container>
+      </WrapMain>
+      <Footer />
+    </>
   );
 };
 
@@ -137,7 +146,7 @@ const Test = styled.button`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin: 50px 0;
 `;
 
 const Login = styled.div`
