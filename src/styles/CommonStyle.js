@@ -44,9 +44,10 @@ export const boxShadow = css`
 `;
 
 export const textNumber = css`
-  font-size: 30px;
-  font-weight: 900;
   position: absolute;
+  bottom: 0px;
+  font-size: 17px;
+  font-weight: 900;
   color: #6c6c6c;
 `;
 

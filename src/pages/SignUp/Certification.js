@@ -41,11 +41,8 @@ const Certification = ({ history }) => {
   };
 
   const checkValidation = () => {
-    fetch(`${HS_API}?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
+    fetch(`${HS_API}/user/sms?phone_number=${phoneNumber}&auth_number=${certifiedNumber}`, {
       method: "GET",
-      // body: JSON.stringify({
-      //   auth_number: certifiedNumber,
-      // }),
     })
       .then((res) => res.json())
       .then((res) => {
