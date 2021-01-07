@@ -3,24 +3,25 @@ import { useHistory } from "react-router-dom";
 import { boxShadow } from "../../styles/CommonStyle";
 import { theme, imgUrl } from "../../styles/CommonStyle";
 import Footer from "../Main/Component/Footer";
+import Nav from "../Main/Component/Nav";
 import styled from "styled-components";
 
 const Main = () => {
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
   const [token, setToken] = useState(true);
 
-  const isLogin = localStorage.getItem("token");
-  const isKakaoLogin = localStorage.getItem("Kakao_token");
+  // const isLogin = localStorage.getItem("token");
+  // const isKakaoLogin = localStorage.getItem("Kakao_token");
   const isToken = localStorage.getItem("token");
   const isKakaoToken = localStorage.getItem("Kakao_token");
 
-  useEffect(() => {
-    if (isLogin || isKakaoLogin) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  });
+  // useEffect(() => {
+  //   if (isLogin || isKakaoLogin) {
+  //     setLogin(true);
+  //   } else {
+  //     setLogin(false);
+  //   }
+  // });
   useEffect(() => {
     if (isToken || isKakaoToken) {
       setToken(true);
@@ -33,18 +34,18 @@ const Main = () => {
   const goToSurvey = () => {
     history.push("/Survey");
   };
-  const goToSignIn = () => {
-    history.push("/SignIn");
-  };
-  const goToSignUp = () => {
-    history.push("/Certification");
-  };
+  // const goToSignIn = () => {
+  //   history.push("/SignIn");
+  // };
+  // const goToSignUp = () => {
+  //   history.push("/Certification");
+  // };
 
-  const goToLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("Kakao_token");
-    history.push("/Main");
-  };
+  // const goToLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("Kakao_token");
+  //   history.push("/Main");
+  // };
 
   const doNotEnter = () => {
     alert("로그인이 필요합니다.");
@@ -52,6 +53,7 @@ const Main = () => {
 
   return (
     <>
+      <Nav />
       <WrapMain>
         <WrapBody>
           <Logo>
@@ -68,14 +70,14 @@ const Main = () => {
           ) : (
             <Test onClick={doNotEnter}> 테스트 시작</Test>
           )}
-          <Container>
-            {login ? (
-              <Login onClick={goToLogout}>로그아웃</Login>
-            ) : (
-              <Login onClick={goToSignIn}>로그인</Login>
-            )}
-            <SignUp onClick={goToSignUp}>회원가입</SignUp>
-          </Container>
+          {/* <Container>
+          {login ? (
+            <Login onClick={goToLogout}>로그아웃</Login>
+          ) : (
+            <Test onClick={doNotEnter}> 테스트 시작</Test>
+          )}
+          <SignUp onClick={goToSignUp}>회원가입</SignUp>
+        </Container> */}
         </WrapBody>
         <Footer />
       </WrapMain>
@@ -94,7 +96,7 @@ const WrapMain = styled.section`
 const WrapBody = styled.div`
   margin: 0 auto;
   max-width: 400px;
-  padding: 120px 0;
+  padding: 50px 0 100px;
 `;
 
 const Logo = styled.div`
@@ -140,44 +142,44 @@ const Test = styled.button`
   }
 `;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 50px 0;
-`;
+// const Container = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   margin: 50px 0;
+// `;
 
-const Login = styled.div`
-  padding-top: 7px;
-  color: #222;
-  font-size: 17px;
-  font-weight: 700;
-  margin: 0 10px;
+// const Login = styled.div`
+//   padding-top: 7px;
+//   color: #222;
+//   font-size: 17px;
+//   font-weight: 700;
+//   margin: 0 10px;
 
-  &:hover {
-    cursor: pointer;
-    width: 80px;
-    height: 30px;
-    border: 1px solid pink;
-    border-radius: 15px;
-    color: #fff;
-    background-color: ${theme.pink};
-  }
-`;
+//   &:hover {
+//     cursor: pointer;
+//     width: 80px;
+//     height: 30px;
+//     border: 1px solid pink;
+//     border-radius: 15px;
+//     color: #fff;
+//     background-color: ${theme.pink};
+//   }
+// `;
 
-const SignUp = styled.div`
-  padding-top: 7px;
-  color: #222;
-  font-size: 17px;
-  font-weight: 700;
-  margin: 0 10px;
+// const SignUp = styled.div`
+//   padding-top: 7px;
+//   color: #222;
+//   font-size: 17px;
+//   font-weight: 700;
+//   margin: 0 10px;
 
-  &:hover {
-    cursor: pointer;
-    width: 80px;
-    height: 30px;
-    border: 1px solid pink;
-    border-radius: 15px;
-    color: #fff;
-    background-color: ${theme.pink};
-  }
-`;
+//   &:hover {
+//     cursor: pointer;
+//     width: 80px;
+//     height: 30px;
+//     border: 1px solid pink;
+//     border-radius: 15px;
+//     color: #fff;
+//     background-color: ${theme.pink};
+//   }
+// `;
