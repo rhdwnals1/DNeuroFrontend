@@ -44,18 +44,15 @@ const Footer = () => {
         </FooterList>
         <DetailContent>
           <div className="information">
-            상호명 : (주)디뉴로Dneuro &nbsp; 이메일 : (고객문의) cs@dnuero.net
-            &nbsp; 대표이사 : 김승종, 조금택 &nbsp; 사업자등록번호 :
-            123-45-67890 &nbsp; 주소 : 서울시 영등포구 의사당대로 83
-            한국휴렛팩커드빌딩{" "}
+            상호명 : (주)디뉴로Dneuro &nbsp; 이메일 : (고객문의) cs@dnuero.net &nbsp; 대표이사 :
+            김승종, 조금택 &nbsp; 사업자등록번호 : 123-45-67890 &nbsp; 주소 : 서울시 영등포구
+            의사당대로 83 한국휴렛팩커드빌딩{" "}
           </div>
           <div className="information">
-            NICEPAY 안전거래 서비스 : 고객님의 안전거래를 위해 현금 결제 시,
-            저희 사이트에서 가입한 구매안전 서비스를 이용할 수 있습니다.
+            NICEPAY 안전거래 서비스 : 고객님의 안전거래를 위해 현금 결제 시, 저희 사이트에서 가입한
+            구매안전 서비스를 이용할 수 있습니다.
           </div>
-          <div className="copyright">
-            Copyright © 2020 by DNEURO, Inc. All rights reserved
-          </div>
+          <div className="copyright">Copyright © 2020 by DNEURO, Inc. All rights reserved</div>
         </DetailContent>
       </Container>
     </Wrapper>
@@ -68,7 +65,6 @@ const Wrapper = styled.div`
   margin-top: 80px;
   position: relative;
   display: flex;
-  background-color: #fafafa;
   z-index: 100;
 `;
 
