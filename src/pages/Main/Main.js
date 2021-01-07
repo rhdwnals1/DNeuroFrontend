@@ -96,7 +96,7 @@ const WrapMain = styled.section`
 const WrapBody = styled.div`
   margin: 0 auto;
   max-width: 400px;
-  padding: 50px 0 100px;
+  padding: 50px 0 101px;
 `;
 
 const Logo = styled.div`
