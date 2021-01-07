@@ -66,7 +66,7 @@ const Survey = () => {
       // history.push("/Result");
       window.location.replace("/Result");
     }
-    console.log(result.survey.id);
+    // console.log(result.survey.id);
   };
 
   const postAnswerB = () => {

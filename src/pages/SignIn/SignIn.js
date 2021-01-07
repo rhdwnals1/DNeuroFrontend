@@ -43,7 +43,7 @@ const SignIn = () => {
     Kakao.Auth.login({
       success: function (authObj) {
         console.log(authObj);
-        fetch(`${SJ_API}/user/kakao`, {
+        fetch(`${HS_API}/user/kakao`, {
           method: "POST",
           headers: {
             Authorization: authObj.access_token,
