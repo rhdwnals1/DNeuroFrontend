@@ -62,7 +62,8 @@ const Footer = () => {
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 80px;
+  position: absolute;
+  bottom: 0;
   background-color: #fafafa;
   z-index: 100;
 `;

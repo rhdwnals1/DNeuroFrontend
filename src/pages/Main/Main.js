@@ -74,13 +74,13 @@ const Main = () => {
           {login ? (
             <Login onClick={goToLogout}>로그아웃</Login>
           ) : (
-            <Test onClick={doNotEnter}> 테스트 시작</Test>
+            <Login onClick={goToSignIn}>로그인</Login>
           )}
           <SignUp onClick={goToSignUp}>회원가입</SignUp>
         </Container> */}
         </WrapBody>
-        <Footer />
       </WrapMain>
+      <Footer />
     </>
   );
 };
@@ -90,16 +90,16 @@ export default Main;
 const WrapMain = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
   text-align: center;
 `;
 
 const WrapBody = styled.div`
-  margin: 0 auto;
   max-width: 400px;
-  padding: 50px 0 101px;
+  margin: 0 auto;
 `;
 
-const Logo = styled.div`
+const Logo = styled.footer`
   width: 110px;
   height: 120px;
   margin: 130px auto 0;

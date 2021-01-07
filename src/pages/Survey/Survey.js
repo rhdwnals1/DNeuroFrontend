@@ -46,6 +46,8 @@ const Survey = () => {
     setOldTime(countTime());
   };
 
+  console.log(result);
+
   const postAnswerA = () => {
     setCurrentTime(countTime());
     console.log("oldTime", oldTime, "current", currentTime, "result", timeResult);
