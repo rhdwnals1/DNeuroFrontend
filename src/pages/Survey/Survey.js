@@ -6,10 +6,8 @@ import { useHistory } from "react-router-dom";
 import { SJ_API } from "../../config";
 import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import ProgressBar from "./components/ProgressBar";
-import { number } from "prop-types";
 
 const Survey = () => {
-  const history = useHistory();
   const [result, setResult] = useState({});
   const [oldTime, setOldTime] = useState();
   const [currentTime, setCurrentTime] = useState();
@@ -19,11 +17,8 @@ const Survey = () => {
   const questionIdx = surveyContent && surveyContent.indexOf("|") + 1;
   const firstAnswer = surveyContent && surveyContent.indexOf("|", questionIdx + 1);
 
-  const testTime = () => {
-    if (currentTime !== oldTime && currentTime > oldTime) {
-      const time = +currentTime - +oldTime;
-      return (time / 1000).toFixed(1);
-    }
+  const testTime = (a, b) => {
+    return ((a - b) / 1000).toFixed(1);
   };
 
   const countTime = () => {
@@ -31,9 +26,8 @@ const Survey = () => {
     return getTime;
   };
 
-  const timeResult = +testTime();
+  const timeResult = +testTime(currentTime, oldTime);
 
-  console.log(timeResult);
   useEffect(() => {
     getSurveyData();
   }, []);
@@ -48,11 +42,13 @@ const Survey = () => {
       .then((res) => res.json())
       .then((result) => {
         setResult(result);
-        setOldTime(countTime());
       });
+    setOldTime(countTime());
   };
 
   const postAnswerA = () => {
+    setCurrentTime(countTime());
+    console.log("oldTime", oldTime, "current", currentTime, "result", timeResult);
     fetch(`${SJ_API}/survey/input`, {
       method: "POST",
       headers: {
@@ -61,13 +57,21 @@ const Survey = () => {
       body: JSON.stringify({
         survey_id: result && result.survey.id,
         answer: "A",
-        time: timeResult,
+        time: 1,
       }),
-    });
-    console.log("surveyID:", surveyId);
+    })
+      .then((res) => res.json())
+      .then((res) => setResult(res));
+    if (result && result.survey.id === 13) {
+      // history.push("/Result");
+      window.location.replace("/Result");
+    }
+    console.log(result.survey.id);
   };
 
   const postAnswerB = () => {
+    setCurrentTime(countTime());
+    console.log("oldTime", oldTime, "current", currentTime, "result", timeResult);
     fetch(`${SJ_API}/survey/input`, {
       method: "POST",
       headers: {
@@ -76,29 +80,24 @@ const Survey = () => {
       body: JSON.stringify({
         survey_id: result && result.survey.id,
         answer: "B",
-        time: timeResult,
+        time: 2,
       }),
-    });
-    console.log("surveyID:", surveyId);
-  };
-
-  const pressButtonA = () => {
-    postAnswerA();
-    setCurrentTime(countTime());
-    getSurveyData();
+    })
+      .then((res) => res.json())
+      .then((res) => setResult(res));
     if (result && result.survey.id === 13) {
-      history.push("/Result");
+      // history.push("/Result");
+      window.location.replace("/Result");
     }
   };
 
-  const pressButtonB = () => {
-    postAnswerB();
-    setCurrentTime(countTime());
-    getSurveyData();
-    if (result && result.survey.id === 13) {
-      history.push("/Result");
-    }
-  };
+  // const pressButtonA = () => {
+  //   postAnswerA();
+  // };
+
+  // const pressButtonB = () => {
+  //   postAnswerB();
+  // };
 
   const resetTest = () => {
     fetch(`${SJ_API}/survey/reset`, {
@@ -135,11 +134,11 @@ const Survey = () => {
                 </h1>
               </Question>
               <Answer>
-                <Button onClick={pressButtonA}>
+                <Button onClick={postAnswerA}>
                   {result.survey && surveyContent.slice(questionIdx, firstAnswer)}
                 </Button>
                 <p>vs</p>
-                <Button onClick={pressButtonB}>
+                <Button onClick={postAnswerB}>
                   {result.survey && surveyContent.slice(firstAnswer + 1)}
                 </Button>
               </Answer>
