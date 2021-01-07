@@ -55,30 +55,32 @@ const Main = () => {
     <>
       <Nav />
       <WrapMain>
-        <Logo>
-          <img src={imgUrl.logo} alt="dneuro" />
-        </Logo>
-        <Title>
-          내 성격에 딱!
-          <br />
-          어울리는 유형은?
-        </Title>
-        <SubTitle>테스트로 보는 내 성격, MBTI</SubTitle>
-        {token ? (
-          <Test onClick={goToSurvey}>테스트 시작</Test>
-        ) : (
-          <Test onClick={doNotEnter}> 테스트 시작</Test>
-        )}
-        {/* <Container>
+        <WrapBody>
+          <Logo>
+            <img src={imgUrl.logo} alt="dneuro" />
+          </Logo>
+          <Title>
+            내 성격에 딱!
+            <br />
+            어울리는 유형은?
+          </Title>
+          <SubTitle>테스트로 보는 내 성격, MBTI</SubTitle>
+          {token ? (
+            <Test onClick={goToSurvey}>테스트 시작</Test>
+          ) : (
+            <Test onClick={doNotEnter}> 테스트 시작</Test>
+          )}
+          {/* <Container>
           {login ? (
             <Login onClick={goToLogout}>로그아웃</Login>
           ) : (
-            <Login onClick={goToSignIn}>로그인</Login>
+            <Test onClick={doNotEnter}> 테스트 시작</Test>
           )}
           <SignUp onClick={goToSignUp}>회원가입</SignUp>
         </Container> */}
+        </WrapBody>
+        <Footer />
       </WrapMain>
-      <Footer />
     </>
   );
 };
@@ -88,14 +90,16 @@ export default Main;
 const WrapMain = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  justify-content: center;
   text-align: center;
 `;
 
-const Logo = styled.footer`
+const WrapBody = styled.div`
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 50px 0 101px;
+`;
+
+const Logo = styled.div`
   width: 110px;
   height: 120px;
   margin: 130px auto 0;

@@ -60,11 +60,10 @@ const Footer = () => {
 };
 
 const Wrapper = styled.div`
-  width: 100%;
-  bottom: 0;
-  margin-top: 80px;
-  position: relative;
   display: flex;
+  width: 100%;
+  margin-top: 80px;
+  background-color: #fafafa;
   z-index: 100;
 `;
 
