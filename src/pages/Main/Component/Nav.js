@@ -33,12 +33,16 @@ const Nav = () => {
   };
 
   const goToMyPage = () => {
-    history.push("/Certification");
+    history.push("/MyPage");
+  };
+
+  const goToMain = () => {
+    history.push("/Main");
   };
 
   return (
     <NavBar>
-      <Img src="/images/JM/dneuro.png" alt="logo" />
+      <Img onClick={goToMain} src="/images/JM/dneuro.png" alt="logo" />
       <Container>
         {login ? (
           <Login onClick={goToLogout}>로그아웃</Login>
@@ -54,18 +58,23 @@ const Nav = () => {
 
 const NavBar = styled.div`
   display: flex;
-  width: 100%;
-  padding: 0 20px;
-  z-index: 100;
-  background: #ffffff;
   position: fixed;
   position: relative;
+  width: 100%;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  background: #ffffff;
 `;
 
 const Img = styled.img`
   width: 145px;
   height: 50px;
   padding: 10px 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Container = styled.div`
@@ -84,6 +93,8 @@ const Login = styled.div`
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.1s;
   }
 `;
 
@@ -96,6 +107,8 @@ const SignUp = styled.div`
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.1s;
   }
 `;
 
@@ -108,6 +121,8 @@ const Mypage = styled.div`
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.1s;
   }
 `;
 
