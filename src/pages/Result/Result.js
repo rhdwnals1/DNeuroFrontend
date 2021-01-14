@@ -42,7 +42,7 @@ const Result = () => {
     <Fragment>
       <WrapResult>
         <Logo>
-          <img src={imgUrl.logo} alt="Logo" />
+          <img onClick={goToMain} src={imgUrl.logo} alt="Logo" />
         </Logo>
         <Explain>
           <div>나의 유형은 ?</div>
@@ -101,6 +101,10 @@ const Logo = styled.div`
   img {
     width: 110px;
     height: 120px;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
