@@ -50,7 +50,7 @@ const Nav = () => {
           <Login onClick={goToSignIn}>로그인</Login>
         )}
         <SignUp onClick={goToSignUp}>회원가입</SignUp>
-        <Mypage onClick={goToMyPage}>마이페이지</Mypage>
+        <Mypage onClick={goToMyPage}>결과 다시보기</Mypage>
       </Container>
     </NavBar>
   );
