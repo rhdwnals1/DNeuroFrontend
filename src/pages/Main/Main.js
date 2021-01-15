@@ -80,7 +80,7 @@ const Main = () => {
         </Container> */}
         </WrapBody>
       </WrapMain>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
