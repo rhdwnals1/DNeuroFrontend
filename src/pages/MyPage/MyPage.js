@@ -24,18 +24,27 @@ const MyPage = () => {
 
   return (
     <Fragment>
-      <Nav />
-      <MyPageNav>
-        <TestResult>결과 다시보기</TestResult>
-      </MyPageNav>
-      <WrapMain>
-        <ShowResult content={content} />
-      </WrapMain>
+      <WrapBody>
+        <Nav />
+        <MyPageNav>
+          <TestResult>결과 다시보기</TestResult>
+        </MyPageNav>
+        <WrapMain>
+          <ShowResult content={content} />
+        </WrapMain>
+      </WrapBody>
     </Fragment>
   );
 };
 
 export default MyPage;
+
+const WrapBody = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const MyPageNav = styled.section`
   ${flexCenter};
@@ -61,4 +70,6 @@ const TestResult = styled(Profile.withComponent(`div`))`
   border: none;
 `;
 
-const WrapMain = styled.section``;
+const WrapMain = styled.section`
+  max-width: 1500px;
+`;

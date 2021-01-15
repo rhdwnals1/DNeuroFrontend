@@ -8,6 +8,7 @@ import { flexCenter, boxShadow, theme, imgUrl } from "../../styles/CommonStyle";
 import ProgressBar from "./components/ProgressBar";
 
 const Survey = () => {
+  const history = useHistory();
   const [result, setResult] = useState({});
   const [oldTime, setOldTime] = useState();
   const [currentTime, setCurrentTime] = useState();
@@ -111,6 +112,10 @@ const Survey = () => {
     getSurveyData();
   };
 
+  const goToMain = () => {
+    history.push("/Main");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
@@ -146,7 +151,7 @@ const Survey = () => {
               </Answer>
               <Retest onClick={resetTest}>다시 검사하기</Retest>
             </WrapMain>
-            <LogoImage src={imgUrl.logo} />
+            <LogoImage onClick={goToMain} src={imgUrl.logo} />
           </SurveyBackground>
         </WrapSurvey>
       </Fragment>
@@ -278,4 +283,8 @@ const LogoImage = styled.img`
 
   margin: auto;
   margin-top: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
